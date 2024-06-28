@@ -29,10 +29,14 @@ function drawChart() {
             headerHeight: 25,
             fontColor: 'black',
             showScale: true,
-            maxPostDepth: 2, // Ensures the header text is larger and more visible
-            headerColor: '#007385'
+            useWeightedAverageForAggregation: true
         };
 
         chart.draw(data, options);
+
+        // Redraw chart on window resize
+        window.addEventListener('resize', function() {
+            chart.draw(data, options);
+        });
     });
 }

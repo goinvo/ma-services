@@ -1,6 +1,30 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    text-align: center;
+}
+
 #chart_div {
     width: 100%;
-    height: 500px;
+    max-width: 900px;
+    height: 0;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    position: relative;
+}
+
+#chart_div > div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 #info {
@@ -12,8 +36,9 @@
 }
 
 /* Apply general styling to TreeMap text */
-google-visualization-treemap-node,
-google-visualization-treemap-node text {
-    font-size: 14px !important;
+.google-visualization-treemap-node,
+.google-visualization-treemap-node text {
+    font-size: 16px !important;
     font-weight: bold !important;
 }
+
