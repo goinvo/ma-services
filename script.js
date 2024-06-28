@@ -2,7 +2,7 @@ google.charts.load('current', {'packages':['treemap']});
 google.charts.setOnLoadCallback(drawChart);
 
 const itemDescriptions = {
-    'Item1': 'Description for Item 1',
+    'MassHealth': 'Description for Item 1',
     'Item2': 'Description for Item 2',
     'Item3': 'Description for Item 3',
     // Add more items and descriptions as needed
