@@ -18,26 +18,21 @@ function drawChart() {
             if (selection.length > 0) {
                 var item = data.getValue(selection[0].row, 0);
                 document.getElementById('info').innerText = 'You selected: ' + item;
+                chart.setSelection([]); // Clear the selection to prevent zooming
             }
         });
 
         var options = {
-            minColor: '#E0F7FA', // Light blue
-            midColor: '#4FC3F7', // Medium blue
-            maxColor: '#01579B', // Dark blue
-            headerHeight: 15,
+            minColor: '#D3EFF4', // Light blue
+            midColor: '#9BC8CF', // Medium blue
+            maxColor: '#007385', // Dark blue
+            headerHeight: 25,
             fontColor: 'black',
             showScale: true,
-            useWeightedAverageForAggregation: true,
-            generateTooltip: showFullTooltip,
+            maxPostDepth: 2, // Ensures the header text is larger and more visible
+            headerColor: '#007385'
         };
 
         chart.draw(data, options);
     });
-}
-
-function showFullTooltip(row, size, value) {
-    return '<div style="background:#fd9; padding:10px; border-style:solid">' +
-           '<span style="font-family:Courier"><b>' + row + '</b>, ' + size + '</span><br>' +
-           '</div>';
 }
