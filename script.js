@@ -3,7 +3,7 @@ google.charts.setOnLoadCallback(() => loadSheet('all'));
 
 const itemDescriptions = {
     'MassHealth': 'Enrollment 2 million',
-    'TAFDC': 'Description ',',
+    'TAFDC': 'Description ',
     // Add more items and descriptions as needed
 };
 
