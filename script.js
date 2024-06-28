@@ -7,7 +7,7 @@ google.charts.setOnLoadCallback(drawChart);
 function drawChart() {
     // Replace the URL below with the URL of your Google Sheet
     var query = new google.visualization.Query('https://docs.google.com/spreadsheets/d/1nKfr0JKhdzhHCMK1ilWhLRfPzgBd5fbpZTtXtOdglsg/gviz/tq?sheet=Sheet1');
-    
+
     query.send(handleQueryResponse);
 }
 
