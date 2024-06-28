@@ -2,8 +2,8 @@ google.charts.load('current', {'packages':['treemap']});
 google.charts.setOnLoadCallback(() => loadSheet('all'));
 
 const itemDescriptions = {
-    'MassHealth': 'Description for Healthcare services',
-    'TAFDC': 'Description for Education services',
+    'Healthcare': 'Description for Healthcare services',
+    'Education': 'Description for Education services',
     'Transportation': 'Description for Transportation services',
     // Add more items and descriptions as needed
 };
@@ -26,6 +26,9 @@ function loadSheet(sheetType) {
     } else if (sheetType === 'eligibility') {
         sheetUrl = 'https://docs.google.com/spreadsheets/d/18zHBxhj_UAkdqEzQsVTFJ5siOZBqMEwjdA6Z0kPumxM/gviz/tq?sheet=Sheet1';
     }
+
+    console.log(`Loading data from: ${sheetUrl}`); // Debugging statement
+
     var query = new google.visualization.Query(sheetUrl);
 
     query.send(function(response) {
