@@ -27,10 +27,17 @@ function drawChart() {
             maxColor: '#01579B', // Dark blue
             headerHeight: 15,
             fontColor: 'black',
-            showScale: true
+            showScale: true,
+            useWeightedAverageForAggregation: true,
+            generateTooltip: showFullTooltip,
         };
 
         chart.draw(data, options);
     });
 }
 
+function showFullTooltip(row, size, value) {
+    return '<div style="background:#fd9; padding:10px; border-style:solid">' +
+           '<span style="font-family:Courier"><b>' + row + '</b>, ' + size + '</span><br>' +
+           '</div>';
+}
