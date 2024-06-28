@@ -21,13 +21,16 @@ function drawChart() {
             }
         });
 
-        chart.draw(data, {
-            minColor: '#f00',
-            midColor: '#ddd',
-            maxColor: '#0d0',
+        var options = {
+            minColor: '#e0f7fa', // Light blue
+            midColor: '#80deea', // Medium blue
+            maxColor: '#00796b', // Dark blue
             headerHeight: 15,
             fontColor: 'black',
             showScale: true
-        });
+        };
+
+        chart.draw(data, options);
     });
 }
+
