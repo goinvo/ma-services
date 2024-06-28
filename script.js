@@ -2,9 +2,9 @@ google.charts.load('current', {'packages':['treemap']});
 google.charts.setOnLoadCallback(drawChart);
 
 const itemDescriptions = {
-    'MassHealth': 'Description for Item 1',
-    'Item2': 'Description for Item 2',
-    'Item3': 'Description for Item 3',
+    'MassHealth': 'Description for Healthcare services',
+    'TAFDC': 'Description for Education services',
+    'Transportation': 'Description for Transportation services',
     // Add more items and descriptions as needed
 };
 
@@ -24,6 +24,7 @@ function drawChart() {
             var selection = chart.getSelection();
             if (selection.length > 0) {
                 var item = data.getValue(selection[0].row, 0);
+                console.log('Selected item:', item); // Debug log
                 var description = itemDescriptions[item] || 'No description available for ' + item;
                 document.getElementById('info').innerText = description;
                 chart.setSelection([]); // Clear the selection to prevent zooming
