@@ -9,7 +9,11 @@
     <script type="text/javascript" src="script.js" defer></script>
 </head>
 <body>
-    <h1>List of all State of MA services</h1>
+    <h1>MA services</h1>
+    <div id="toolbar">
+        <button onclick="loadSheet('all')">All Services</button>
+        <button onclick="loadSheet('eligibility')">Eligibility Services</button>
+    </div>
     <div id="chart_div" style="width: 900px; height: 500px;"></div>
     <div id="info" style="margin-top: 20px; font-size: 18px; font-weight: bold;"></div>
 </body>
