@@ -1,0 +1,17 @@
+{
+  "Services": {
+    "Parent": "",
+    "Size": 0,
+    "Color ": 0
+  },
+  "MassHealth": {
+    "Parent": "Services",
+    "Size": 8000000,
+    "Color ": 6
+  },
+  "TAFDC": {
+    "Parent": "Services",
+    "Size": 4000000,
+    "Color ": 2
+  }
+}
