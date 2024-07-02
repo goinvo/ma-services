@@ -78,8 +78,8 @@ function drawTreeMap(data) {
 
     leaf.append("text")
         .attr("class", "treemap-text")
-        .attr("x", 10)
-        .attr("y", 30)
+        .attr("x", 5)
+        .attr("y", 20)
         .text(d => d.data.name);
 }
 
