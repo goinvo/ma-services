@@ -1,23 +1,11 @@
-google.charts.load('current', {'packages':['treemap']});
-google.charts.setOnLoadCallback(() => loadSheet('all'));
-
+// Define item descriptions
 const itemDescriptions = {
     'MassHealth': 'Enrollment 2 million',
     'TAFDC': 'Description ',
     // Add more items and descriptions as needed
 };
 
-let chart;
-let options = {
-    minColor: '#D3EFF4', // Light blue
-    midColor: '#9BC8CF', // Medium blue
-    maxColor: '#007385', // Dark blue
-    headerHeight: 25,
-    fontColor: 'black',
-    showScale: true,
-    useWeightedAverageForAggregation: true
-};
-
+// Function to load and process data from Google Sheets
 function loadSheet(sheetType) {
     let sheetUrl;
     if (sheetType === 'all') {
@@ -26,58 +14,81 @@ function loadSheet(sheetType) {
         sheetUrl = 'https://docs.google.com/spreadsheets/d/18zHBxhj_UAkdqEzQsVTFJ5siOZBqMEwjdA6Z0kPumxM/gviz/tq?sheet=Sheet1';
     }
 
-    var query = new google.visualization.Query(sheetUrl);
+    fetch(sheetUrl)
+        .then(response => response.text())
+        .then(dataText => {
+            const jsonData = JSON.parse(dataText.substr(47).slice(0, -2)); // Strip away Google Sheets function padding
+            const data = processData(jsonData.table.rows);
 
-    query.send(function(response) {
-        if (response.isError()) {
-            console.error('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
-            return;
-        }
-
-        var data = response.getDataTable();
-        if (!chart) {
-            chart = new google.visualization.TreeMap(document.getElementById('chart_div'));
-        }
-
-        google.visualization.events.addListener(chart, 'select', function() {
-            var selection = chart.getSelection();
-            if (selection.length > 0) {
-                var item = data.getValue(selection[0].row, 0);
-                var description = itemDescriptions[item] || 'No description available for ' + item;
-                document.getElementById('info').innerText = description;
-                chart.setSelection([]); // Clear the selection to prevent zooming
-            }
-        });
-
-        chart.draw(data, options);
-    });
+            drawTreeMap(data);
+        })
+        .catch(error => console.error('Error fetching data:', error));
 }
 
-// D3.js example
-document.addEventListener("DOMContentLoaded", function() {
-    // Select the d3_chart_div and append an SVG element to it
+// Process the Google Sheets data into a hierarchical structure
+function processData(rows) {
+    let data = {
+        name: "Services",
+        children: []
+    };
+
+    rows.forEach(row => {
+        data.children.push({
+            name: row.c[0].v, // Assuming the first column is the name
+            size: row.c[1].v // Assuming the second column is the size
+        });
+    });
+
+    return data;
+}
+
+// Draw the TreeMap using D3.js
+function drawTreeMap(data) {
+    const width = 900;
+    const height = 500;
+
     const svg = d3.select("#d3_chart_div")
+        .html("") // Clear any existing content
         .append("svg")
-        .attr("width", 900)
-        .attr("height", 500);
+        .attr("width", width)
+        .attr("height", height);
 
-    // Example: Appending a circle to the SVG
-    svg.append("circle")
-        .attr("cx", 450)
-        .attr("cy", 250)
-        .attr("r", 100)
-        .style("fill", "steelblue");
+    const root = d3.hierarchy(data)
+        .sum(d => d.size)
+        .sort((a, b) => b.size - a.size);
 
-    // Example: Creating a bar chart
-    const data = [10, 20, 30, 40, 50];
+    d3.treemap()
+        .size([width, height])
+        .padding(1)
+        (root);
 
-    svg.selectAll("rect")
-        .data(data)
-        .enter()
-        .append("rect")
-        .attr("x", (d, i) => i * 100)
-        .attr("y", d => 500 - d * 10)
-        .attr("width", 80)
-        .attr("height", d => d * 10)
-        .style("fill", "orange");
+    const cell = svg.selectAll("g")
+        .data(root.leaves())
+        .enter().append("g")
+        .attr("transform", d => `translate(${d.x0},${d.y0})`);
+
+    cell.append("rect")
+        .attr("id", d => d.data.name)
+        .attr("width", d => d.x1 - d.x0)
+        .attr("height", d => d.y1 - d.y0)
+        .attr("fill", d => {
+            const scale = d3.scaleLinear()
+                .domain([0, d3.max(root.leaves(), d => d.size)])
+                .range(["#D3EFF4", "#007385"]);
+            return scale(d.size);
+        })
+        .on("click", function(event, d) {
+            const description = itemDescriptions[d.data.name] || 'No description available for ' + d.data.name;
+            document.getElementById('info').innerText = description;
+        });
+
+    cell.append("text")
+        .attr("x", 4)
+        .attr("y", 14)
+        .text(d => d.data.name);
+}
+
+// Initialize the default sheet load
+document.addEventListener("DOMContentLoaded", function() {
+    loadSheet('all');
 });
