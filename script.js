@@ -73,9 +73,9 @@ function drawTreeMap(data) {
         .attr("height", d => d.y1 - d.y0)
         .attr("fill", d => {
             const scale = d3.scaleLinear()
-                .domain([0, d3.max(root.leaves(), d => d.size)])
+                .domain([0, d3.max(root.leaves(), d => d.value)])
                 .range(["#D3EFF4", "#007385"]);
-            return scale(d.size);
+            return scale(d.value);
         })
         .on("click", function(event, d) {
             const description = itemDescriptions[d.data.name] || 'No description available for ' + d.data.name;
@@ -85,7 +85,8 @@ function drawTreeMap(data) {
     cell.append("text")
         .attr("x", 4)
         .attr("y", 14)
-        .text(d => d.data.name);
+        .text(d => d.data.name)
+        .attr("fill", "white");
 }
 
 // Initialize the default sheet load
