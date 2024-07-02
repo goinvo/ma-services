@@ -77,9 +77,11 @@ function drawTreeMap(data) {
         });
 
     leaf.append("text")
-        .attr("class", "treemap-text")
         .attr("x", 5)
         .attr("y", 20)
+        .attr("fill", "white")
+        .style("font-size", "16px")  // Adjust this value to increase the text size
+        .style("font-weight", "bold")
         .text(d => d.data.name);
 }
 
