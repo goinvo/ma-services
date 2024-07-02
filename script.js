@@ -67,7 +67,6 @@ function drawTreeMap(data) {
         .text(d => `${d.ancestors().reverse().map(d => d.data.name).join(".")}\n${format(d.value)}`);
 
     leaf.append("rect")
-        .attr("id", d => (d.leafUid = DOM.uid("leaf")).id)
         .attr("fill", d => { while (d.depth > 1) d = d.parent; return color(d.data.name); })
         .attr("fill-opacity", 0.6)
         .attr("width", d => d.x1 - d.x0)
@@ -77,21 +76,12 @@ function drawTreeMap(data) {
             document.getElementById('info').innerText = description;
         });
 
-    leaf.append("clipPath")
-        .attr("id", d => (d.clipUid = DOM.uid("clip")).id)
-        .append("use")
-        .attr("xlink:href", d => d.leafUid.href);
-
     leaf.append("text")
-        .attr("clip-path", d => d.clipUid)
-        .selectAll("tspan")
-        .data(d => d.data.name.split(/(?=[A-Z][a-z])|\s+/g).concat(format(d.value)))
-        .join("tspan")
         .attr("x", 5)  // Add padding
         .attr("y", (d, i, nodes) => `${(i === nodes.length - 1) * 0.3 + 1.1 + i * 0.9}em`)
         .attr("fill-opacity", (d, i, nodes) => i === nodes.length - 1 ? 0.7 : null)
         .style("font-size", "12px")  // Increase font size
-        .text(d => d);
+        .text(d => d.data.name);
 }
 
 document.addEventListener("DOMContentLoaded", function() {
