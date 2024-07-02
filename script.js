@@ -38,7 +38,7 @@ function drawTreeMap(data) {
     const width = 1154;
     const height = 500;
 
-    const color = d3.scaleOrdinal(d3.schemeCategory10);
+    const color = d3.scaleSequential([0, d3.max(data.children, d => d.value)], d3.interpolateBlues);
 
     const root = d3.treemap()
         .tile(d3.treemapResquarify)
@@ -67,8 +67,8 @@ function drawTreeMap(data) {
 
     leaf.append("rect")
         .attr("id", d => (d.leafUid = d.data.name))
-        .attr("fill", d => { while (d.depth > 1) d = d.parent; return color(d.data.name); })
-        .attr("fill-opacity", 0.7)
+        .attr("fill", d => { while (d.depth > 1) d = d.parent; return color(d.value); })
+        .attr("fill-opacity", 0.9)
         .attr("width", d => d.x1 - d.x0)
         .attr("height", d => d.y1 - d.y0)
         .on("click", function(event, d) {
@@ -77,14 +77,12 @@ function drawTreeMap(data) {
         });
 
     leaf.append("text")
-        .attr("clip-path", d => `url(#clip-${d.leafUid})`)
-        .selectAll("tspan")
-        .data(d => d.data.name.split(/(?=[A-Z][a-z])|\s+/g))
-        .join("tspan")
-        .attr("x", 4)
-        .attr("y", (d, i) => 13 + i * 10)
-        .attr("fill-opacity", 0.9)
-        .text(d => d);
+        .attr("x", 5)
+        .attr("y", 20)
+        .attr("fill", "white")
+        .style("font-size", "14px")
+        .style("font-weight", "bold")
+        .text(d => d.data.name);
 }
 
 document.addEventListener("DOMContentLoaded", function() {
