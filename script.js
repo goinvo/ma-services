@@ -96,4 +96,3 @@ function drawTreeMap(data) {
 document.addEventListener("DOMContentLoaded", function() {
     loadData('services.json');
 });
-
