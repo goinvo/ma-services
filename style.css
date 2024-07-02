@@ -27,9 +27,11 @@ body {
     background: #e8e8e8;
     padding: 10px;
     display: flex;
-    justify-content: center;
-    gap: 10px;
-    border-bottom: 1px solid #ddd;
+    flex-direction: column;
+    align-items: flex-start;
+    border-right: 1px solid #ddd;
+    min-height: 100vh; /* Full height */
+    max-width: 200px; /* Fixed width */
 }
 
 .nav button {
@@ -40,6 +42,9 @@ body {
     background-color: #007385;
     color: white;
     border-radius: 5px;
+    margin: 5px 0;
+    width: 100%; /* Full width */
+    text-align: left; /* Align text to the left */
 }
 
 .nav button:hover {
@@ -47,9 +52,10 @@ body {
 }
 
 .main {
-    width: 100%;
+    width: calc(100% - 200px); /* Adjust width */
     max-width: 1154px;
     padding: 20px;
+    margin-left: 200px; /* Align next to navbar */
 }
 
 #d3_chart_div {

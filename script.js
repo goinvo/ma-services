@@ -86,13 +86,14 @@ function drawTreeMap(data) {
         .selectAll("tspan")
         .data(d => d.data.name.split(/(?=[A-Z][a-z])|\s+/g).concat(format(d.value)))
         .join("tspan")
-        .attr("x", 5)  // Add padding
-        .attr("y", (d, i, nodes) => `${(i === nodes.length - 1) * 0.3 + 1.1 + i * 0.9}em`)
+        .attr("x", 10)  // Add more padding
+        .attr("y", (d, i, nodes) => `${(i === nodes.length - 1) * 0.3 + 1.2 + i * 1.0}em`)  // Adjust y-position for more space
         .attr("fill-opacity", (d, i, nodes) => i === nodes.length - 1 ? 0.7 : null)
-        .style("font-size", "12px")  // Increase font size
+        .style("font-size", "14px")  // Increase font size
         .text(d => d);
 }
 
 document.addEventListener("DOMContentLoaded", function() {
     loadData('services.json');
 });
+
