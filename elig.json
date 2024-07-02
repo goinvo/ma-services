@@ -1,27 +1,32 @@
 {
-  "Services": {
+"Services": {
     "Parent": "",
     "Size": 0,
+    "Spending": 0,
     "Color ": 0
   },
   "MassHealth": {
     "Parent": "Services",
     "Size": 2127026,
-    "Color ": 6
+    "Spending": 19170000000,
+    "Color ": 10
   },
   "TAFDC": {
     "Parent": "Services",
     "Size": 92659,
-    "Color ": 2
+    "Spending": 300000000,
+    "Color ": 8
   },
   "EAEDC": {
     "Parent": "Services",
     "Size": 28070,
-    "Color ": 0
+    "Spending": 95000000,
+    "Color ": 5
   },
   "SNAP": {
     "Parent": "Services",
     "Size": 1083392,
-    "Color ": 0
+    "Spending": 60000000,
+    "Color ": 3
   }
 }

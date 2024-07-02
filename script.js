@@ -9,6 +9,10 @@ const itemDescriptions = {
     // Add more items and descriptions as needed
 };
 
+
+
+
+
 // Load data from JSON file
 function loadData(jsonFile) {
     fetch(jsonFile + '?_=' + new Date().getTime()) // Append a unique query string to disable caching
@@ -119,7 +123,57 @@ function drawTreeMap(data) {
         .attr("fill", "white")
         .style("font-size", "12px")
         .text(d => format(d.value));
+
+    createBasicLegend(color);
 }
+
+
+// Legend
+function createBasicLegend(colorScale) {
+    const legendContainer = d3.select("#legend").html("").append("svg")
+        .attr("width", 300)
+        .attr("height", 70) // Increased height to accommodate the title above
+        .style("font", "10px open-sans");
+
+    const legendScale = d3.scaleLinear()
+        .domain(colorScale.domain())
+        .range([0, 300]);
+
+    const legendAxis = d3.axisBottom(legendScale)
+        .ticks(2); // Only two ticks
+
+    const gradient = legendContainer.append("defs").append("linearGradient")
+        .attr("id", "legend-gradient");
+
+    gradient.selectAll("stop")
+        .data(colorScale.ticks(10).map((t, i, n) => ({ 
+            offset: `${100 * i / n.length}%`, 
+            color: colorScale(t) 
+        })))
+        .enter().append("stop")
+        .attr("offset", d => d.offset)
+        .attr("stop-color", d => d.color);
+
+    legendContainer.append("rect")
+        .attr("width", 300)
+        .attr("height", 20)
+        .attr("y", 20) // Moved down to make space for the title
+        .style("fill", "url(#legend-gradient)");
+
+    legendContainer.append("g")
+        .attr("transform", "translate(0,40)") // Adjusted to match the new position of the rect
+        .call(legendAxis);
+
+    legendContainer.append("text")
+        .attr("x", 150)
+        .attr("y", 10) // Positioned above the legend
+        .attr("text-anchor", "middle")
+        .style("font-size", "12px")
+        .text("Spending");
+}
+
+
+
 
 // Function to wrap text
 function wrapText(selection) {

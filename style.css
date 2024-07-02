@@ -96,6 +96,15 @@ body {
     min-height: 50px; /* Ensure space for the description */
 }
 
+.legend-title {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    text-anchor: middle;
+    fill: black;
+}
+
+
 /* Responsive design for medium screens */
 @media (max-width: 768px) {
     .container {
@@ -117,6 +126,8 @@ body {
         height: 600px; /* Adjusted for header and nav */
     }
 }
+
+
 
 /* Responsive design for small screens */
 @media (max-width: 480px) {
