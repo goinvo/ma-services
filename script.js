@@ -13,7 +13,8 @@ function loadData(jsonFile) {
     fetch(jsonFile)
         .then(response => response.json())
         .then(data => {
-            drawTreeMap(buildHierarchy(data));
+            const hierarchyData = buildHierarchy(data);
+            drawTreeMap(hierarchyData);
         })
         .catch(error => console.error('Error fetching data:', error));
 }

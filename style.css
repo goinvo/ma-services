@@ -11,6 +11,7 @@ body {
     flex-direction: column;
     margin: 0;
     padding: 0;
+    height: 100vh;
 }
 
 .header {
@@ -23,8 +24,7 @@ body {
 
 .container {
     display: flex;
-    width: 100%;
-    height: calc(100vh - 80px); /* Adjust for header height */
+    flex: 1;
 }
 
 .nav {
@@ -56,6 +56,7 @@ body {
 .main {
     flex: 1;
     padding: 20px;
+    overflow: auto;
 }
 
 #d3_chart_div {
