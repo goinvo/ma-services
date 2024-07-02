@@ -1,18 +1,20 @@
-/* Basic reset */
+/* Base styles and reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Body styling */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Open Sans', sans-serif;
     display: flex;
     flex-direction: column;
     height: 100vh;
     overflow: hidden; /* Ensure no scrolling */
 }
 
+/* Header styling */
 .header {
     width: 100%;
     background: #f8f8f8;
@@ -21,6 +23,7 @@ body {
     border-bottom: 1px solid #ddd;
 }
 
+/* Main container styling */
 .container {
     display: flex;
     flex: 1;
@@ -28,9 +31,10 @@ body {
     height: calc(100vh - 80px); /* Adjust for header height */
 }
 
+/* Navigation bar styling */
 .nav {
-    width: 150px; /* Reduced width */
-    background: #e8e8e8;
+    width: 150px; /* Slightly increased width */
+    background: #f4f4f4;
     padding: 10px; /* Adjusted padding */
     display: flex;
     flex-direction: column;
@@ -39,26 +43,40 @@ body {
     overflow-y: auto;
 }
 
+.nav-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
 .nav button {
     padding: 10px;
     font-size: 14px; /* Adjusted font size */
     cursor: pointer;
     border: none;
-    background-color: #007385;
-    color: white;
-    border-radius: 5px;
-    margin: 5px 0;
+    background: none;
     text-align: left;
+    width: 100%;
+    margin: 5px 0;
+    color: #007385;
 }
 
 .nav button:hover {
-    background-color: #005f65;
+    background-color: #e0e0e0;
 }
 
+.nav button.active {
+    background-color: #d0d0d0;
+    font-weight: bold;
+}
+
+/* Main content styling */
 .main {
     flex: 1;
     padding: 10px; /* Adjusted padding */
-    overflow: hidden;
+    overflow-y: auto; /* Enable scrolling for main content */
     display: flex;
     flex-direction: column;
 }
@@ -66,19 +84,19 @@ body {
 #d3_chart_div {
     flex: 1;
     width: 100%;
-    height: calc(100vh - 120px); /* Adjust for header and padding */
+    max-height: 800px; /* Increased max height for the chart */
 }
 
 #info {
     margin-top: 10px;
     font-size: 18px;
-    font-weight: bold;
+    font-weight: 600;
     text-align: center;
     color: black;
     min-height: 50px; /* Ensure space for the description */
 }
 
-/* Media queries for responsive design */
+/* Responsive design for medium screens */
 @media (max-width: 768px) {
     .container {
         flex-direction: column;
@@ -96,10 +114,11 @@ body {
     }
 
     #d3_chart_div {
-        height: calc(100vh - 200px); /* Adjust for header and nav */
+        height: 600px; /* Adjusted for header and nav */
     }
 }
 
+/* Responsive design for small screens */
 @media (max-width: 480px) {
     .header {
         padding: 10px;

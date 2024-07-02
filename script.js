@@ -11,7 +11,7 @@ const itemDescriptions = {
 
 // Load data from JSON file
 function loadData(jsonFile) {
-    fetch(jsonFile)
+    fetch(jsonFile + '?_=' + new Date().getTime()) // Append a unique query string to disable caching
         .then(response => response.json())
         .then(data => {
             const hierarchyData = buildHierarchy(data); // Convert flat data to hierarchical
@@ -32,7 +32,7 @@ function buildHierarchy(data) {
         if (item.Parent === "") {
             root.name = key; // Set root name
         } else if (item.Parent === "Services") {
-            root.children.push({ name: key, value: item.Size }); // Add children to root
+            root.children.push({ name: key, value: item.Size, spending: item.Spending }); // Add children to root with spending
         }
     });
 
@@ -104,42 +104,47 @@ function drawTreeMap(data) {
         .attr("x", paddingLeft)
         .attr("y", paddingTop + 12) // Adjust based on padding and font size
         .attr("fill", "white")
-        .style("font-size", "16px")
-        .each(function(d) {
-            const node = d3.select(this);
-            const words = d.data.name.split(/\s+/).reverse();
-            let word;
-            const line = [];
-            const lineHeight = 1.1; // ems
-            let lineNumber = 0;
-            const x = node.attr("x");
-            const y = node.attr("y");
-            const dy = parseFloat(node.attr("dy") || 0);
-            let tspan = node.text(null).append("tspan").attr("x", x).attr("y", y).attr("dy", dy + "em");
-
-            while (word = words.pop()) {
-                line.push(word);
-                tspan.text(line.join(" "));
-                if (tspan.node().getComputedTextLength() > (d.x1 - d.x0 - paddingLeft * 2)) { // Adjust width for padding
-                    line.pop();
-                    tspan.text(line.join(" "));
-                    line.length = 0;
-                    line.push(word);
-                    tspan = node.append("tspan").attr("x", x).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
-                }
-            }
-        });
+        .style("font-size", "14px")
+        .style("font-weight", "bold")
+        .text(d => d.data.name)
+        .call(wrapText);
 
     // Add enrollment number below name
     node.append("text")
         .attr("x", paddingLeft)
         .attr("y", function(d) {
             const textHeight = this.previousSibling.getBBox().height;
-            return paddingTop + textHeight + 12; // Adjust to place below the name
+            return paddingTop + textHeight + 15; // Adjust to place below the name
         })
         .attr("fill", "white")
         .style("font-size", "12px")
         .text(d => format(d.value));
+}
+
+// Function to wrap text
+function wrapText(selection) {
+    selection.each(function() {
+        const node = d3.select(this);
+        const words = node.text().split(/\s+/).reverse();
+        let word;
+        const line = [];
+        const lineHeight = 1.1; // ems
+        const x = node.attr("x");
+        const y = node.attr("y");
+        const dy = parseFloat(node.attr("dy") || 0);
+        let tspan = node.text(null).append("tspan").attr("x", x).attr("y", y).attr("dy", dy + "em");
+        while (word = words.pop()) {
+            line.push(word);
+            tspan.text(line.join(" "));
+            if (tspan.node().getComputedTextLength() > (node.node().parentNode.getBBox().width - 20)) {
+                line.pop();
+                tspan.text(line.join(" "));
+                line.length = 0;
+                line.push(word);
+                tspan = node.append("tspan").attr("x", x).attr("y", y).attr("dy", lineHeight + dy + "em").text(word);
+            }
+        }
+    });
 }
 
 // Load initial data when the document is ready
