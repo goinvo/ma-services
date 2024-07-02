@@ -1,6 +1,11 @@
 const itemDescriptions = {
     'MassHealth': 'Enrollment 2 million',
     'TAFDC': 'Description ',
+    'EAEDC': 'Description ',
+    'SNAP': 'Description ',
+    'LIHEAP': 'Description ',
+    'SSDI': 'Description ',
+    'SSI': 'Description '
     // Add more items and descriptions as needed
 };
 
@@ -8,9 +13,25 @@ function loadData(jsonFile) {
     fetch(jsonFile)
         .then(response => response.json())
         .then(data => {
-            drawTreeMap(data);
+            const hierarchy = buildHierarchy(data);
+            drawTreeMap(hierarchy);
         })
         .catch(error => console.error('Error fetching data:', error));
+}
+
+function buildHierarchy(data) {
+    const root = { name: "Services", children: [] };
+
+    Object.keys(data).forEach(key => {
+        const item = data[key];
+        if (item.Parent === "") {
+            root.name = key;
+        } else if (item.Parent === "Services") {
+            root.children.push({ name: key, value: item.Size });
+        }
+    });
+
+    return root;
 }
 
 function drawTreeMap(data) {
