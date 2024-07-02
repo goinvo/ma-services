@@ -52,3 +52,32 @@ function loadSheet(sheetType) {
         chart.draw(data, options);
     });
 }
+
+// D3.js example
+document.addEventListener("DOMContentLoaded", function() {
+    // Select the chart_div and append an SVG element to it
+    const svg = d3.select("#chart_div")
+        .append("svg")
+        .attr("width", 900)
+        .attr("height", 500);
+
+    // Example: Appending a circle to the SVG
+    svg.append("circle")
+        .attr("cx", 450)
+        .attr("cy", 250)
+        .attr("r", 100)
+        .style("fill", "steelblue");
+
+    // Example: Creating a bar chart
+    const data = [10, 20, 30, 40, 50];
+
+    svg.selectAll("rect")
+        .data(data)
+        .enter()
+        .append("rect")
+        .attr("x", (d, i) => i * 100)
+        .attr("y", d => 500 - d * 10)
+        .attr("width", 80)
+        .attr("height", d => d * 10)
+        .style("fill", "orange");
+});
