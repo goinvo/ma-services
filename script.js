@@ -1,4 +1,3 @@
-// Descriptions for each service
 const itemDescriptions = {
     'MassHealth': 'Enrollment 2 million',
     'TAFDC': 'Transitional Aid to Families with Dependent Children',
@@ -17,6 +16,9 @@ function loadData(jsonFile) {
         .then(data => {
             const hierarchyData = buildHierarchy(data); // Convert flat data to hierarchical
             drawTreeMap(hierarchyData); // Draw the TreeMap
+
+            // Redraw tree map on window resize
+            window.addEventListener('resize', () => drawTreeMap(hierarchyData));
         })
         .catch(error => console.error('Error fetching data:', error));
 }
@@ -39,15 +41,19 @@ function buildHierarchy(data) {
 
 // Draw the TreeMap
 function drawTreeMap(data) {
-    const width = 1154;
-    const height = 500;
+    const container = document.getElementById('d3_chart_div');
+    const width = container.clientWidth;
+    const height = container.clientHeight;
 
     // Custom color scale using shades of #007385
     const color = d3.scaleLinear()
         .domain([0, d3.max(data.children, d => d.value)])
-        .range(["#D3EFF4", "#007385"]); // Light blue to dark blue
+        .range(["#B6DFE6", "#007385"]); // Light blue to dark blue
 
-    // Compute the layout
+    // Number format with commas
+    const format = d3.format(",");
+
+    // Compute the layout with resquarify method
     const root = d3.treemap()
         .tile(d3.treemapResquarify)
         .size([width, height])
@@ -63,8 +69,12 @@ function drawTreeMap(data) {
         .append("svg")
         .attr("viewBox", `0 0 ${width} ${height}`)
         .attr("width", "100%")
-        .attr("height", height)
+        .attr("height", "100%")
         .attr("style", "font: 10px sans-serif;");
+
+    // Define padding values
+    const paddingTop = 10;
+    const paddingLeft = 10;
 
     // Add a group for each leaf node
     const node = svg.selectAll("g")
@@ -88,33 +98,47 @@ function drawTreeMap(data) {
             document.getElementById('info').innerText = description; // Show description on click
         });
 
-    // Define clip paths for text clipping
-    node.append("clipPath")
-        .attr("id", d => (d.clipUid = `clip-${d.leafUid}`))
-        .append("use")
-        .attr("xlink:href", d => `#${d.leafUid}`);
-
     // Add text for each node
-    const text = node.append("text")
-        .attr("clip-path", d => `url(#clip-${d.leafUid})`)
-        .attr("x", 4)
-        .attr("y", 20)
-        .attr("fill", "white");
+    node.append("text")
+        .attr("x", paddingLeft)
+        .attr("y", paddingTop + 12) // Adjust based on padding and font size
+        .attr("fill", "white")
+        .style("font-size", "16px")
+        .each(function(d) {
+            const node = d3.select(this);
+            const words = d.data.name.split(/\s+/).reverse();
+            let word;
+            const line = [];
+            const lineHeight = 1.1; // ems
+            let lineNumber = 0;
+            const x = node.attr("x");
+            const y = node.attr("y");
+            const dy = parseFloat(node.attr("dy") || 0);
+            let tspan = node.text(null).append("tspan").attr("x", x).attr("y", y).attr("dy", dy + "em");
 
-    // Add service name with font size 18px
-    text.append("tspan")
-        .attr("x", 4)
-        .attr("y", 20)
-        .style("font-size", "18px")
-        .style("font-weight", "bold")
-        .text(d => d.data.name);
+            while (word = words.pop()) {
+                line.push(word);
+                tspan.text(line.join(" "));
+                if (tspan.node().getComputedTextLength() > (d.x1 - d.x0 - paddingLeft * 2)) { // Adjust width for padding
+                    line.pop();
+                    tspan.text(line.join(" "));
+                    line.length = 0;
+                    line.push(word);
+                    tspan = node.append("tspan").attr("x", x).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+                }
+            }
+        });
 
-    // Add enrollment number with font size 14px
-    text.append("tspan")
-        .attr("x", 4)
-        .attr("y", 40)
-        .style("font-size", "14px")
-        .text(d => `Enrollment: ${d.data.value}`);
+    // Add enrollment number below name
+    node.append("text")
+        .attr("x", paddingLeft)
+        .attr("y", function(d) {
+            const textHeight = this.previousSibling.getBBox().height;
+            return paddingTop + textHeight + 12; // Adjust to place below the name
+        })
+        .attr("fill", "white")
+        .style("font-size", "12px")
+        .text(d => format(d.value));
 }
 
 // Load initial data when the document is ready
