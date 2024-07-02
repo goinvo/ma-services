@@ -1,8 +1,46 @@
+/* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     font-family: Arial, sans-serif;
-    margin: 0;
+    display: grid;
+    grid-template-areas: 
+        "header"
+        "nav"
+        "main";
+    grid-template-rows: auto auto 1fr;
+    grid-gap: 10px;
+    min-height: 100vh;
     padding: 20px;
     text-align: center;
+}
+
+.header {
+    grid-area: header;
+    background: #f8f8f8;
+    padding: 20px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.nav {
+    grid-area: nav;
+    margin-bottom: 20px;
+    background: #e8e8e8;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.main {
+    grid-area: main;
+    margin: 0 auto;
+    background: #d8d8d8;
+    padding: 20px;
+    border-radius: 5px;
 }
 
 #toolbar {
@@ -11,6 +49,9 @@ body {
 
 #chart_div {
     margin: 0 auto;
+    width: 100%; /* Ensure the chart takes up the full width of the container */
+    max-width: 900px;
+    height: 500px;
 }
 
 #info {
@@ -24,4 +65,20 @@ button {
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    body {
+        grid-template-areas: 
+            "header"
+            "nav"
+            "main";
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto 1fr;
+    }
+
+    #chart_div {
+        height: auto; /* Allow the height to adjust based on content */
+    }
 }
