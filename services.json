@@ -1,0 +1,52 @@
+{
+  "Services": {
+    "Parent": "",
+    "Size": 0,
+    "Color ": 0
+  },
+  "MassHealth": {
+    "Parent": "Services",
+    "Size": 8000000,
+    "Color ": 6
+  },
+  "TAFDC": {
+    "Parent": "Services",
+    "Size": 4000000,
+    "Color ": 2
+  },
+  "EAEDC": {
+    "Parent": "Services",
+    "Size": 2000000,
+    "Color ": 0
+  },
+  "SNAP": {
+    "Parent": "Services",
+    "Size": 2000000,
+    "Color ": 0
+  },
+  "LIHEAP": {
+    "Parent": "Services",
+    "Size": 2000000,
+    "Color ": 0
+  },
+  "SSDI": {
+    "Parent": "Services",
+    "Size": 2000000,
+    "Color ": 0
+  },
+  "SSI": {
+    "Parent": "Services",
+    "Size": 2000000,
+    "Color ": 0
+  },
+  "Unemployment Insurance": {
+    "Parent": "Services",
+    "Size": 4000000,
+    "Color ": 2
+  },
+  "Veterans Benefits": {
+    "Parent": "Services",
+    "Size": 2000000,
+    "Color ": 0
+  }
+}

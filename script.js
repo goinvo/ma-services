@@ -4,38 +4,13 @@ const itemDescriptions = {
     // Add more items and descriptions as needed
 };
 
-function loadSheet(sheetType) {
-    let sheetUrl;
-    if (sheetType === 'all') {
-        sheetUrl = 'https://docs.google.com/spreadsheets/d/1nKfr0JKhdzhHCMK1ilWhLRfPzgBd5fbpZTtXtOdglsg/gviz/tq?sheet=Sheet1';
-    } else if (sheetType === 'eligibility') {
-        sheetUrl = 'https://docs.google.com/spreadsheets/d/18zHBxhj_UAkdqEzQsVTFJ5siOZBqMEwjdA6Z0kPumxM/gviz/tq?sheet=Sheet1';
-    }
-
-    fetch(sheetUrl)
-        .then(response => response.text())
-        .then(dataText => {
-            const jsonData = JSON.parse(dataText.substr(47).slice(0, -2));
-            const data = processData(jsonData.table.rows);
+function loadData(jsonFile) {
+    fetch(jsonFile)
+        .then(response => response.json())
+        .then(data => {
             drawTreeMap(data);
         })
         .catch(error => console.error('Error fetching data:', error));
-}
-
-function processData(rows) {
-    let data = {
-        name: "Services",
-        children: []
-    };
-
-    rows.forEach(row => {
-        data.children.push({
-            name: row.c[0].v,
-            value: row.c[1].v
-        });
-    });
-
-    return data;
 }
 
 function drawTreeMap(data) {
@@ -43,7 +18,7 @@ function drawTreeMap(data) {
     const height = 500;
 
     const svg = d3.select("#d3_chart_div")
-        .html("")
+        .html("") // Clear any existing content
         .append("svg")
         .attr("width", width)
         .attr("height", height);
@@ -84,5 +59,5 @@ function drawTreeMap(data) {
 }
 
 document.addEventListener("DOMContentLoaded", function() {
-    loadSheet('all');
+    loadData('services.json');
 });
