@@ -1,11 +1,11 @@
 const itemDescriptions = {
     'MassHealth': 'Enrollment 2 million',
-    'TAFDC': 'Description ',
-    'EAEDC': 'Description ',
-    'SNAP': 'Description ',
-    'LIHEAP': 'Description ',
-    'SSDI': 'Description ',
-    'SSI': 'Description '
+    'TAFDC': 'Transitional Aid to Families with Dependent Children',
+    'EAEDC': 'Emergency Aid to the Elderly, Disabled, and Children',
+    'SNAP': 'Supplemental Nutrition Assistance Program',
+    'LIHEAP': 'Low Income Home Energy Assistance Program',
+    'SSDI': 'Social Security Disability Insurance',
+    'SSI': 'Supplemental Security Income'
     // Add more items and descriptions as needed
 };
 
