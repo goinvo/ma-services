@@ -36,14 +36,14 @@ function buildHierarchy(data) {
 
 function drawTreeMap(data) {
     const width = 1154;
-    const height = 1154;
+    const height = 500;
 
-    const color = d3.scaleOrdinal(data.children.map(d => d.name), d3.schemeTableau10);
+    const color = d3.scaleOrdinal(d3.schemeCategory10);
 
     const root = d3.treemap()
-        .tile(d3.treemapSquarify)
+        .tile(d3.treemapResquarify)
         .size([width, height])
-        .padding(5)  // Increase padding
+        .paddingInner(3)
         .round(true)
         (d3.hierarchy(data)
             .sum(d => d.value)
@@ -52,23 +52,23 @@ function drawTreeMap(data) {
     const svg = d3.select("#d3_chart_div")
         .html("")
         .append("svg")
-        .attr("viewBox", [0, 0, width, height])
-        .attr("width", width)
+        .attr("viewBox", `0 0 ${width} ${height}`)
+        .attr("width", "100%")
         .attr("height", height)
-        .attr("style", "max-width: 100%; height: auto; font: 10px sans-serif;");
+        .attr("style", "font: 10px sans-serif;");
 
     const leaf = svg.selectAll("g")
         .data(root.leaves())
         .join("g")
         .attr("transform", d => `translate(${d.x0},${d.y0})`);
 
-    const format = d3.format(",d");
     leaf.append("title")
-        .text(d => `${d.ancestors().reverse().map(d => d.data.name).join(".")}\n${format(d.value)}`);
+        .text(d => `${d.ancestors().reverse().map(d => d.data.name).join("/")}\n${d.value}`);
 
     leaf.append("rect")
+        .attr("id", d => (d.leafUid = d.data.name))
         .attr("fill", d => { while (d.depth > 1) d = d.parent; return color(d.data.name); })
-        .attr("fill-opacity", 0.6)
+        .attr("fill-opacity", 0.7)
         .attr("width", d => d.x1 - d.x0)
         .attr("height", d => d.y1 - d.y0)
         .on("click", function(event, d) {
@@ -77,14 +77,16 @@ function drawTreeMap(data) {
         });
 
     leaf.append("text")
-        .attr("x", 5)  // Add padding
-        .attr("y", (d, i, nodes) => `${(i === nodes.length - 1) * 0.3 + 1.1 + i * 0.9}em`)
-        .attr("fill-opacity", (d, i, nodes) => i === nodes.length - 1 ? 0.7 : null)
-        .style("font-size", "12px")  // Increase font size
-        .text(d => d.data.name);
+        .attr("clip-path", d => `url(#clip-${d.leafUid})`)
+        .selectAll("tspan")
+        .data(d => d.data.name.split(/(?=[A-Z][a-z])|\s+/g))
+        .join("tspan")
+        .attr("x", 4)
+        .attr("y", (d, i) => 13 + i * 10)
+        .attr("fill-opacity", 0.9)
+        .text(d => d);
 }
 
 document.addEventListener("DOMContentLoaded", function() {
     loadData('services.json');
 });
-
