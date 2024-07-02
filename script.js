@@ -55,8 +55,8 @@ function loadSheet(sheetType) {
 
 // D3.js example
 document.addEventListener("DOMContentLoaded", function() {
-    // Select the chart_div and append an SVG element to it
-    const svg = d3.select("#chart_div")
+    // Select the d3_chart_div and append an SVG element to it
+    const svg = d3.select("#d3_chart_div")
         .append("svg")
         .attr("width", 900)
         .attr("height", 500);
