@@ -1,11 +1,9 @@
-// Define item descriptions
 const itemDescriptions = {
     'MassHealth': 'Enrollment 2 million',
     'TAFDC': 'Description ',
     // Add more items and descriptions as needed
 };
 
-// Function to load and process data from Google Sheets
 function loadSheet(sheetType) {
     let sheetUrl;
     if (sheetType === 'all') {
@@ -17,15 +15,13 @@ function loadSheet(sheetType) {
     fetch(sheetUrl)
         .then(response => response.text())
         .then(dataText => {
-            const jsonData = JSON.parse(dataText.substr(47).slice(0, -2)); // Strip away Google Sheets function padding
+            const jsonData = JSON.parse(dataText.substr(47).slice(0, -2));
             const data = processData(jsonData.table.rows);
-
             drawTreeMap(data);
         })
         .catch(error => console.error('Error fetching data:', error));
 }
 
-// Process the Google Sheets data into a hierarchical structure
 function processData(rows) {
     let data = {
         name: "Services",
@@ -34,33 +30,31 @@ function processData(rows) {
 
     rows.forEach(row => {
         data.children.push({
-            name: row.c[0].v, // Assuming the first column is the name
-            size: row.c[1].v // Assuming the second column is the size
+            name: row.c[0].v,
+            value: row.c[1].v
         });
     });
 
     return data;
 }
 
-// Draw the TreeMap using D3.js
 function drawTreeMap(data) {
     const width = 900;
     const height = 500;
 
     const svg = d3.select("#d3_chart_div")
-        .html("") // Clear any existing content
+        .html("")
         .append("svg")
         .attr("width", width)
         .attr("height", height);
 
     const root = d3.hierarchy(data)
-        .sum(d => d.size)
-        .sort((a, b) => b.size - a.size);
+        .sum(d => d.value)
+        .sort((a, b) => b.value - a.value);
 
     d3.treemap()
         .size([width, height])
-        .padding(1)
-        (root);
+        .padding(1)(root);
 
     const cell = svg.selectAll("g")
         .data(root.leaves())
@@ -89,7 +83,6 @@ function drawTreeMap(data) {
         .attr("fill", "white");
 }
 
-// Initialize the default sheet load
 document.addEventListener("DOMContentLoaded", function() {
     loadSheet('all');
 });
