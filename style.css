@@ -9,7 +9,6 @@ body {
     font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
-    align-items: center;
     margin: 0;
     padding: 0;
 }
@@ -22,24 +21,32 @@ body {
     border-bottom: 1px solid #ddd;
 }
 
-.nav {
-    width: 100%;
-    background: #e8e8e8;
-    padding: 10px;
+.container {
     display: flex;
-    justify-content: center;
-    gap: 10px;
-    border-bottom: 1px solid #ddd;
+    width: 100%;
+    height: calc(100vh - 80px); /* Adjust for header height */
+}
+
+.nav {
+    width: 200px;
+    background: #e8e8e8;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #ddd;
 }
 
 .nav button {
-    padding: 10px 20px;
+    padding: 10px;
     font-size: 16px;
     cursor: pointer;
     border: none;
     background-color: #007385;
     color: white;
     border-radius: 5px;
+    margin: 5px 0;
+    text-align: left;
+    width: 100%;
 }
 
 .nav button:hover {
@@ -47,9 +54,9 @@ body {
 }
 
 .main {
-    width: 100%;
-    max-width: 1154px;
+    flex: 1;
     padding: 20px;
+    overflow: auto;
 }
 
 #d3_chart_div {
