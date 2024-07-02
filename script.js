@@ -1,5 +1,5 @@
 const itemDescriptions = {
-    'MassHealth': 'Enrollment 2 million',
+    'MassHealth': 'Massachusetts Health Insurance',
     'TAFDC': 'Transitional Aid to Families with Dependent Children',
     'EAEDC': 'Emergency Aid to the Elderly, Disabled, and Children',
     'SNAP': 'Supplemental Nutrition Assistance Program',
@@ -94,8 +94,9 @@ function drawTreeMap(data) {
         .attr("width", d => d.x1 - d.x0)
         .attr("height", d => d.y1 - d.y0)
         .on("click", function(event, d) {
-            const description = itemDescriptions[d.data.name] || 'No description available for ' + d.data.name;
-            document.getElementById('info').innerText = description; // Show description on click
+            const description = itemDescriptions[d.data.name] || 'No description available';
+            const formattedDescription = `${d.data.name} - ${description}\n${format(d.value)} individuals enrolled`;
+            document.getElementById('info').innerText = formattedDescription; // Show description on click
         });
 
     // Add text for each node
