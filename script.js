@@ -26,7 +26,6 @@ function loadData(jsonFile) {
 // Convert flat data to hierarchical format
 function buildHierarchy(data) {
     const root = { name: "Services", children: [] };
-
     Object.keys(data).forEach(key => {
         const item = data[key];
         if (item.Parent === "") {
@@ -35,7 +34,6 @@ function buildHierarchy(data) {
             root.children.push({ name: key, value: item.Size, spending: item.Spending }); // Add children to root with spending
         }
     });
-
     return root;
 }
 
@@ -44,14 +42,13 @@ function updateHeader(title) {
     document.getElementById('tree-map-header').innerText = title;
 }
 
-// Draw the TreeMap
+// Function to draw tree map
 function drawTreeMap(data) {
     const container = document.getElementById('d3_chart_div');
-    
     const width = container.clientWidth;
     const height = container.clientHeight;
 
-    // Custom color scale using shades of #007385
+    // Custom color scale using shades of blue
     const color = d3.scaleLinear()
         .domain([0, d3.max(data.children, d => d.value)])
         .range(["#E6F7FA", "#BBDCE1"]); // Light blue to dark blue
@@ -112,64 +109,24 @@ function drawTreeMap(data) {
 
     // Add text for each node
     node.append("text")
-        .attr("x", paddingLeft)
-        .attr("y", paddingTop + 5)
+        .attr("x", d => (d.x1 - d.x0) / 2)
+        .attr("y", d => (d.y1 - d.y0) / 2)
         .attr("fill", "black")
         .attr("class", "node-text")
-        //.style("font-weight", "bold")
+        .style("text-anchor", "middle")
         .text(d => d.data.name)
-        .call(wrap, 10)
+        .call(wrap, function(d) { return d.x1 - d.x0 - 2 * paddingLeft; });
 
-
-    // createBasicLegend(color);
-    
+    // Add enrolled text for large nodes
+    node.filter(d => d.value >= 250000)          // check size for determinging is a box gets data
+        .append("text")                             
+        .attr("x", d => (d.x1 - d.x0) / 2)
+        .attr("y", d => (d.y1 - d.y0) / 2 + 20)
+        .attr("fill", "black")
+        .attr("class", "node-text-enrolled")
+        .style("text-anchor", "middle")
+        .text(d => `${format(d.value)} enrolled`);
 }
-
-/*
-// Legend
-function createBasicLegend(colorScale) {
-    const legendContainer = d3.select("#legend").html("").append("svg")
-        .attr("width", 300)
-        .attr("height", 70) // Increased height to accommodate the title above
-        .style("font", "10px open-sans");
-
-    const legendScale = d3.scaleLinear()
-        .domain(colorScale.domain())
-        .range([0, 300]);
-
-    const legendAxis = d3.axisBottom(legendScale)
-        .ticks(2); // Only two ticks
-
-    const gradient = legendContainer.append("defs").append("linearGradient")
-        .attr("id", "legend-gradient");
-
-    gradient.selectAll("stop")
-        .data(colorScale.ticks(10).map((t, i, n) => ({ 
-            offset: `${100 * i / n.length}%`, 
-            color: colorScale(t) 
-        })))
-        .enter().append("stop")
-        .attr("offset", d => d.offset)
-        .attr("stop-color", d => d.color);
-
-    legendContainer.append("rect")
-        .attr("width", 300)
-        .attr("height", 20)
-        .attr("y", 20) // Moved down to make space for the title
-        .style("fill", "url(#legend-gradient)");
-
-    legendContainer.append("g")
-        .attr("transform", "translate(0,40)") // Adjusted to match the new position of the rect
-        .call(legendAxis);
-
-    legendContainer.append("text")
-        .attr("x", 150)
-        .attr("y", 10) // Positioned above the legend
-        .attr("text-anchor", "middle")
-        .style("font-size", "12px")
-        .text("Spending");
-}
-*/ 
 
 // Function to wrap text within a given width
 function wrap(text, width) {
@@ -202,10 +159,16 @@ function wrap(text, width) {
                             .text(word);
             }
         }
+        // Center the text vertically within the box
+        const bbox = text.node().getBBox();
+        const textHeight = bbox.height;
+        const boxHeight = d3.select(text.node().parentNode).select('rect').attr('height');
+        text.attr('y', +y + (boxHeight - textHeight) / 2);
     });
 }
 
 
+// Event listeners 
 // Load initial data when the document is ready
 document.addEventListener("DOMContentLoaded", function() {
     loadData('services.json');
@@ -218,13 +181,11 @@ document.getElementById('all-services-button').addEventListener('click', functio
     updateHeader("All Massachusetts Services");
     toggleMenu();
 });
-
 document.getElementById('eligibility-button').addEventListener('click', function() {
     loadData('elig.json');
     updateHeader("Eligibility Services");
     toggleMenu();
 });
-
 document.getElementById('other-button').addEventListener('click', function() {
     loadData('other.json');
     updateHeader("Other Services");
@@ -236,20 +197,16 @@ document.getElementById('all-services-button-desktop').addEventListener('click',
     loadData('services.json');
     updateHeader("All Massachusetts Services");
 });
-
 document.getElementById('eligibility-button-desktop').addEventListener('click', function() {
     loadData('elig.json');
     updateHeader("Eligibility Services");
 });
-
 document.getElementById('other-button-desktop').addEventListener('click', function() {
     loadData('other.json');
     updateHeader("Other Services");
 });
 
-
-
-// Toggle mobile menu
+// Toggle mobile menu 
 function toggleMenu() {
     const menu = document.getElementById("mobileMenu");
     if (menu.style.display === "block") {

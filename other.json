@@ -17,6 +17,12 @@
     "Spending": 68000000,
     "Color ": 5
   },
+  "Unemployment Insurance": {
+    "Parent": "Services",
+    "Size": 120000,
+    "Spending": 1500000000,
+    "Color ": 9
+  },
   "TAFDC": {
     "Parent": "Services",
     "Size": 92659,
