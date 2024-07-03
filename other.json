@@ -1,0 +1,26 @@
+{
+  "Services": {
+    "Parent": "0",
+    "Size": 0,
+    "Spending": 0,
+    "Color ": 0
+  },
+  "EAEDC": {
+    "Parent": "Services",
+    "Size": 28070,
+    "Spending": 95000000,
+    "Color ": 8
+  },
+  "Veterans Benefits": {
+    "Parent": "Services",
+    "Size": 68000,
+    "Spending": 68000000,
+    "Color ": 5
+  },
+  "TAFDC": {
+    "Parent": "Services",
+    "Size": 92659,
+    "Spending": 300000000,
+    "Color ": 10
+  }
+}

@@ -11,35 +11,23 @@
     "Spending": 19170000000,
     "Color ": 10
   },
-  "TAFDC": {
-    "Parent": "Services",
-    "Size": 92659,
-    "Spending": 300000000,
-    "Color ": 8
-  },
-  "EAEDC": {
-    "Parent": "Services",
-    "Size": 28070,
-    "Spending": 95000000,
-    "Color ": 5
-  },
   "SNAP": {
     "Parent": "Services",
     "Size": 1083392,
     "Spending": 60000000,
-    "Color ": 3
+    "Color ": 4
   },
   "LIHEAP": {
     "Parent": "Services",
     "Size": 320000,
     "Spending": 150000000,
-    "Color ": 6
+    "Color ": 5
   },
   "SSDI": {
     "Parent": "Services",
     "Size": 282000,
     "Spending": 30000000,
-    "Color ": 2
+    "Color ": 3
   },
   "SSI": {
     "Parent": "Services",
@@ -53,10 +41,10 @@
     "Spending": 1500000000,
     "Color ": 9
   },
-  "Veterans Benefits": {
+  "Other": {
     "Parent": "Services",
-    "Size": 68000,
-    "Spending": 68000000,
-    "Color ": 4
+    "Size": 188729,
+    "Spending": 463000000,
+    "Color ": 8
   }
 }

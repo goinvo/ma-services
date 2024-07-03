@@ -12,13 +12,22 @@
 <body>
     <header class="header">
         <h1>Massachusetts Services</h1>
-    </header>
-    <div class="container">
-        <nav class="nav">
-            <div class="nav-title">Filters</div>
-            <button id="all-services-button">All Services</button>
-            <button id="eligibility-button">Eligibility Only</button>
+        <nav class="nav" id="desktopMenu">
+            <button id="all-services-button-desktop">All Services</button>
+            <button id="eligibility-button-desktop">Eligibility Only</button>
+            <button id="other-button-desktop">Other Services</button>
         </nav>
+        <a href="javascript:void(0);" class="icon" onclick="toggleMenu()">
+            &#9776;
+        </a>
+    </header>
+    <nav class="nav" id="mobileMenu">
+        <button id="all-services-button">All Services</button>
+        <button id="eligibility-button">Eligibility Only</button>
+        <button id="other-button">Other Services</button>
+    </nav>
+    <div class="container">
+        <h2 id="tree-map-header">Massachusetts Services</h2> 
         <main class="main">
             <div id="legend" align="right"></div>
             <div id="d3_chart_div"></div>
