@@ -39,14 +39,13 @@ function buildHierarchy(data) {
 
 // Function to update the header text
 function updateHeader(title) {
-    document.getElementById('tree-map-header').innerHTML = `<button id="back-button" class="back-button" style="display: none;">← Back</button> ${title}`;
+    document.getElementById('tree-map-header').innerHTML = `<button id="back-button" class="back-button" style="display: none;">&lt;</button> ${title}`;
     document.getElementById('back-button').addEventListener('click', function() {
         loadData('services.json');
         updateHeader("All Massachusetts Services");
         document.getElementById('back-button').style.display = 'none';
     });
 }
-
 // Function to draw tree map
 function drawTreeMap(data) {
     const container = document.getElementById('d3_chart_div');
