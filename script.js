@@ -39,7 +39,12 @@ function buildHierarchy(data) {
 
 // Function to update the header text
 function updateHeader(title) {
-    document.getElementById('tree-map-header').innerText = title;
+    document.getElementById('tree-map-header').innerHTML = `<button id="back-button" class="back-button" style="display: none;">← Back</button> ${title}`;
+    document.getElementById('back-button').addEventListener('click', function() {
+        loadData('services.json');
+        updateHeader("All Massachusetts Services");
+        document.getElementById('back-button').style.display = 'none';
+    });
 }
 
 // Function to draw tree map
@@ -100,6 +105,7 @@ function drawTreeMap(data) {
             if (d.data.name === "Other") {
                 loadData('other.json');
                 updateHeader("Other Services");
+                document.getElementById('back-button').style.display = 'block';
             } else {
                 const description = itemDescriptions[d.data.name] || 'No description available';
                 const formattedDescription = `${d.data.name} - ${description}\n${format(d.value)} individuals enrolled`;
@@ -176,35 +182,51 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 // Event listeners for buttons (Mobile)
+document.getElementById('back-button').addEventListener('click', function() {
+    loadData('services.json');
+    updateHeader("All Massachusetts Services");
+    document.getElementById('back-button').style.display = 'none';
+});
+
 document.getElementById('all-services-button').addEventListener('click', function() {
     loadData('services.json');
     updateHeader("All Massachusetts Services");
+    document.getElementById('back-button').style.display = 'none';
     toggleMenu();
 });
 document.getElementById('eligibility-button').addEventListener('click', function() {
     loadData('elig.json');
     updateHeader("Eligibility Services");
+    document.getElementById('back-button').style.display = 'inline-block';
     toggleMenu();
 });
 document.getElementById('other-button').addEventListener('click', function() {
     loadData('other.json');
     updateHeader("Other Services");
+    document.getElementById('back-button').style.display = 'inline-block';
     toggleMenu();
 });
+
 
 // Event listeners for buttons (Desktop)
 document.getElementById('all-services-button-desktop').addEventListener('click', function() {
     loadData('services.json');
     updateHeader("All Massachusetts Services");
+    document.getElementById('back-button').style.display = 'inline-block';
 });
 document.getElementById('eligibility-button-desktop').addEventListener('click', function() {
     loadData('elig.json');
     updateHeader("Eligibility Services");
+    document.getElementById('back-button').style.display = 'inline-block';
 });
 document.getElementById('other-button-desktop').addEventListener('click', function() {
     loadData('other.json');
     updateHeader("Other Services");
+    document.getElementById('back-button').style.display = 'inline-block';
 });
+
+
+
 
 // Toggle mobile menu 
 function toggleMenu() {

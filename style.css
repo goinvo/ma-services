@@ -41,12 +41,34 @@ body {
     text-decoration: none; /* Remove underline */
 }
 
-h2{
+h2 {
+    display: flex;
+    align-items: center;
     font-family: 'Open Sans', sans-serif;
     text-align: left;
     padding: 10px;
     font-size: 14px; 
     color: black;
+}
+
+/* Back button */
+.back-button {
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    background: none;
+    text-align: left;
+    color: #007385;
+    margin-right: 10px;
+}
+
+.back-button:hover {
+    background-color: #e0e0e0;
+}
+
+.back-button:active {
+    font-weight: bold;
 }
 
 /* Navigation bar styling */
