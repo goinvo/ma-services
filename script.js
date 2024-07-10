@@ -16,9 +16,7 @@ function loadData(jsonFile) {
         .then(data => {
             const hierarchyData = buildHierarchy(data); // Convert flat data to hierarchical
             drawTreeMap(hierarchyData); // Draw the TreeMap
-
-            // Redraw tree map on window resize
-            window.addEventListener('resize', () => drawTreeMap(hierarchyData));
+            window.addEventListener('resize', () => drawTreeMap(hierarchyData)); // Redraw tree map on window resize
         })
         .catch(error => console.error('Error fetching data:', error));
 }
@@ -30,7 +28,7 @@ function buildHierarchy(data) {
         const item = data[key];
         if (item.Parent === "") {
             root.name = key; // Set root name
-        } else if (item.Parent === "Services") {    // Note if parent is not ervices, this will break
+        } else if (item.Parent === "Services") {    
             root.children.push({ name: key, value: item.Size, spending: item.Spending }); // Add children to root with spending
         }
     });
@@ -46,6 +44,7 @@ function updateHeader(title) {
         document.getElementById('back-button').style.display = 'none';
     });
 }
+
 // Function to draw tree map
 function drawTreeMap(data) {
     const container = document.getElementById('d3_chart_div');
@@ -87,19 +86,7 @@ function drawTreeMap(data) {
     const node = svg.selectAll("g")
         .data(root.leaves())
         .join("g")
-        .attr("transform", d => `translate(${d.x0},${d.y0})`);
-
-    // Add title (tooltip) for each node
-    node.append("title")
-        .text(d => `${d.ancestors().reverse().map(d => d.data.name).join("/")}\n${d.value}`);
-
-    // Add rectangles for each node
-    node.append("rect")
-        .attr("id", d => (d.leafUid = d.data.name))
-        .attr("fill", d => color(d.value))
-        .attr("fill-opacity", 0.9)
-        .attr("width", d => d.x1 - d.x0)
-        .attr("height", d => d.y1 - d.y0)
+        .attr("transform", d => `translate(${d.x0},${d.y0})`)
         .on("click", function(event, d) {
             if (d.data.name === "Other") {
                 loadData('other.json');
@@ -112,6 +99,18 @@ function drawTreeMap(data) {
             }
         });
 
+    // Add title (tooltip) for each node
+    node.append("title")
+        .text(d => `${d.ancestors().reverse().map(d => d.data.name).join("/")}\n${d.value}`);
+
+    // Add rectangles for each node
+    node.append("rect")
+        .attr("id", d => (d.leafUid = d.data.name))
+        .attr("fill", d => color(d.value))
+        .attr("fill-opacity", 0.9)
+        .attr("width", d => d.x1 - d.x0)
+        .attr("height", d => d.y1 - d.y0);
+
     // Add text for each node
     node.append("text")
         .attr("x", d => (d.x1 - d.x0) / 2)
@@ -123,7 +122,7 @@ function drawTreeMap(data) {
         .call(wrap, function(d) { return d.x1 - d.x0 - 2 * paddingLeft; });
 
     // Add enrolled text for large nodes
-    node.filter(d => d.value >= 250000)          // check size for determinging is a box gets data
+    node.filter(d => d.value >= 250000)          // check size for determining if a box gets data
         .append("text")                             
         .attr("x", d => (d.x1 - d.x0) / 2)
         .attr("y", d => (d.y1 - d.y0) / 2 + 20)
@@ -205,6 +204,9 @@ document.getElementById('other-button').addEventListener('click', function() {
     document.getElementById('back-button').style.display = 'inline-block';
     toggleMenu();
 });
+document.getElementById('see-code-button').addEventListener('click', function() {
+    window.open('https://github.com/goinvo/ma-services', '_blank');
+});
 
 
 // Event listeners for buttons (Desktop)
@@ -223,16 +225,18 @@ document.getElementById('other-button-desktop').addEventListener('click', functi
     updateHeader("Other Services");
     document.getElementById('back-button').style.display = 'inline-block';
 });
-
+document.getElementById('see-code-button-desktop').addEventListener('click', function() {
+    window.open('https://github.com/goinvo/ma-services', '_blank');
+});
 
 
 
 // Toggle mobile menu 
 function toggleMenu() {
     const menu = document.getElementById("mobileMenu");
-    if (menu.style.display === "block") {
+    if (menu.style.display === "flex") {
         menu.style.display = "none";
     } else {
-        menu.style.display = "block";
+        menu.style.display = "flex";
     }
 }

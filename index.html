@@ -16,22 +16,25 @@
             <button id="all-services-button-desktop">All Services</button>
             <button id="eligibility-button-desktop">Eligibility Only</button>
             <button id="other-button-desktop">Other Services</button>
+            <button id="see-code-button-desktop">See Code</button>
         </nav>
         <a href="javascript:void(0);" class="icon" onclick="toggleMenu()">
             &#9776;
         </a>
     </header>
-    <nav class="nav" id="mobileMenu">
+    <div id="mobileMenu" class="mobile-menu">
         <button id="all-services-button">All Services</button>
         <button id="eligibility-button">Eligibility Only</button>
         <button id="other-button">Other Services</button>
-    </nav>
+        <button id="see-code-button" class="see-code">See Code</button>
+        <button class="close-menu" onclick="toggleMenu()">Close</button>
+    </div>
     <div class="container">
         <h2 id="tree-map-header">
             <button id="back-button" class="back-button" style="display: none;">&lt;</button>
             Massachusetts Services
         </h2> 
-            <main class="main">
+        <main class="main">
             <div id="legend" align="right"></div>
             <div id="d3_chart_div"></div>
             <div id="info"></div>
