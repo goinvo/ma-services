@@ -13,32 +13,42 @@
     <header class="header">
         <h1>Massachusetts Services</h1>
         <nav class="nav" id="desktopMenu">
-            <button id="all-services-button-desktop">All Services</button>
-            <button id="eligibility-button-desktop">Eligibility Only</button>
-            <button id="other-button-desktop">Other Services</button>
-            <button id="see-code-button-desktop">See Code</button>
+            <button id="see-code-button">Code</button>
+            <div class="button-group">
+                <button id="all-services-button" class="filter-button">All</button>
+                <button id="eligibility-button" class="filter-button">Core</button>
+            </div>
+            <div class="button-group">
+                <button id="tree-view-button" class="view-button">Tree</button>
+                <button id="table-view-button" class="view-button">Table</button>
+            </div>
         </nav>
-        <a href="javascript:void(0);" class="icon" onclick="toggleMenu()">
-            &#9776;
-        </a>
     </header>
-    <div id="mobileMenu" class="mobile-menu">
-        <button id="all-services-button">All Services</button>
-        <button id="eligibility-button">Eligibility Only</button>
-        <button id="other-button">Other Services</button>
-        <button id="see-code-button" class="see-code">See Code</button>
-        <button class="close-menu" onclick="toggleMenu()">Close</button>
-    </div>
+
     <div class="container">
         <h2 id="tree-map-header">
             <button id="back-button" class="back-button" style="display: none;">&lt;</button>
             Massachusetts Services
-        </h2> 
+        </h2>
         <main class="main">
             <div id="legend" align="right"></div>
             <div id="d3_chart_div"></div>
+            <div id="table_div" style="display: none;"></div>
             <div id="info"></div>
         </main>
     </div>
+
+    <!-- Mobile Navigation Bar -->
+    <nav class="mobile-nav">
+        <div class="button-group">
+            <button id="all-services-button-mobile" class="filter-button">All</button>
+            <button id="eligibility-button-mobile" class="filter-button">Core</button>
+        </div>
+        <div class="button-group">
+            <button id="tree-view-button-mobile" class="view-button">Tree</button>
+            <button id="table-view-button-mobile" class="view-button">Table</button>
+        </div>
+        <button id="see-code-button-mobile">Code</button>
+    </nav>
 </body>
 </html>
