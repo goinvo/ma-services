@@ -11,14 +11,14 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    overflow: auto; /* Ensure scrolling */
+    overflow: auto; 
 }
 
 /* Header styling */
 .header {
     width: 100%;
     background: #f8f8f8;
-    padding: 10px;
+    padding: 5px;
     text-align: left;
     border-bottom: 1px solid #ddd;
     position: relative;
@@ -36,7 +36,6 @@ body {
 h2 {
     display: flex;
     align-items: center;
-    font-family: 'Open Sans', sans-serif;
     text-align: left;
     padding: 10px;
     font-size: 14px; 
@@ -53,7 +52,7 @@ h2 {
     text-align: left;
     color: #007385;
     margin-right: 10px;
-    display: none; /* Initially hidden */
+    display: none; 
     align-items: center;
 }
 
@@ -65,32 +64,46 @@ h2 {
     font-weight: bold;
 }
 
-/* Navigation bar styling */
+/* Nav bar styling */
 .nav {
-    display: flex;
+    display: none; /* Hides nav on mobile */
+}
+
+/* Mobile navigation bar */
+.mobile-nav {
+    display: flex; /* Shows nav at bottom on mobile */
     flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    background: #f8f8f8;
+    border-top: 1px solid #ddd;
+    padding: 10px;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.nav > button,
-.nav > div {
-    margin-left: 20px; /* Add spacing between nav items */
+.mobile-nav .button-group {
+    display: flex;
+    border: 1px solid #007385;
+    border-radius: 4px;
+    overflow: hidden;
+    flex: 1;
+    margin: 0 5px;
 }
 
-.nav button {
+.mobile-nav button {
+    flex: 1;
     padding: 10px;
     font-size: 14px;
-    cursor: pointer;
     border: none;
     background: none;
-    text-align: center;
     color: #007385;
+    text-align: center;
 }
 
-.nav button:hover {
-    background-color: #e0e0e0;
-}
-
-.nav button.selected {
+.mobile-nav button.selected {
     background-color: #d0d0d0;
     font-weight: bold;
 }
@@ -113,7 +126,7 @@ h2 {
 }
 
 .button-group button.selected {
-    background-color: #cccccc; /* Slightly darker color to indicate selection */
+    background-color: #cccccc; /* Selected button color */
 }
 
 /* Main container styling */
@@ -134,7 +147,7 @@ h2 {
 #d3_chart_div {
     flex: 1;
     width: 100%;
-    height: 300px; /* Adjust this value to make the TreeMap smaller */
+    height: 300px; /* Size of tree map for mobile */
 }
 
 #info {
@@ -147,7 +160,6 @@ h2 {
 }
 
 .legend-title {
-    font-family: 'Open Sans', sans-serif;
     font-size: 12px;
     font-weight: bold;
     text-anchor: middle;
@@ -155,12 +167,12 @@ h2 {
 }
 
 .node-text-enrolled {
-    font-size: 12px;   /* Small font for mobile */
+    font-size: 12px;   /* Smaller font for mobile */
     text-align: center;
 }
 
 .node-text {
-    font-size: 14px;   /* Small font for mobile */
+    font-size: 14px;   /* Smaller font for mobile */
     text-align: center;
 }
 
@@ -168,12 +180,16 @@ h2 {
 .data-table {
     width: 100%;
     border-collapse: collapse;
+    overflow-x: auto;
+    display: block;
 }
 
 .data-table th, .data-table td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
+    font-size: 14px; 
+    white-space: nowrap;
 }
 
 .data-table th {
@@ -187,7 +203,7 @@ h2 {
 
 .data-table tr:hover {
     background-color: #f1f1f1;
-    cursor: pointer; /* Make rows clickable */
+    cursor: pointer; /* Makes rows clickable */
 }
 
 /* Responsive design for tablets */
@@ -205,15 +221,15 @@ h2 {
     }
 
     .container {
-        flex-direction: column; /* Change to column for tablets and above */
+        flex-direction: column; 
     }
 
     .nav {
         display: flex;
         width: auto;
         height: auto;
-        flex-direction: row; /* Row for buttons */
-        justify-content: flex-end; /* Right justify */
+        flex-direction: row;
+        justify-content: flex-end; 
     }
 
     .main {
@@ -221,7 +237,7 @@ h2 {
     }
 
     #d3_chart_div {
-        height: 400px; /* Adjust this value to make the TreeMap smaller for tablets */
+        height: 400px; /* Size of tree map for tablets */
     }
     .mobile-nav {
         display: none;
@@ -231,11 +247,11 @@ h2 {
 /* Responsive design for desktops */
 @media (min-width: 1024px) {
     .nav {
-        width: auto; /* Ensure auto width for nav bar */
+        width: auto; 
     }
 
     #d3_chart_div {
-        max-height: 600px; /* Adjust this value to make the TreeMap smaller for desktops */
+        max-height: 600px; /* Size of tree map for desktop */
     }
 
     #info {
@@ -252,74 +268,5 @@ h2 {
 
     .mobile-nav {
         display: none;
-    }
-}
-
-/* Additional styling for small screens */
-@media (max-width: 600px) {
-    .header {
-        padding: 5px;
-        font-size: 18px; /* Shrink header font size */
-    }
-
-    .nav {
-        display: none; /* Hide nav on mobile */
-    }
-
-    .main {
-        padding: 10px;
-    }
-
-    .mobile-nav {
-        display: flex; /* Show nav at bottom on mobile */
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        position: sticky;
-        bottom: 0;
-        width: 100%;
-        background: #f8f8f8;
-        border-top: 1px solid #ddd;
-        padding: 10px;
-        box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    .mobile-nav .button-group {
-        display: flex;
-        border: 1px solid #007385;
-        border-radius: 4px;
-        overflow: hidden;
-        flex: 1;
-        margin: 0 5px;
-    }
-
-    .mobile-nav button {
-        flex: 1;
-        padding: 10px;
-        font-size: 14px;
-        border: none;
-        background: none;
-        color: #007385;
-        text-align: center;
-    }
-
-    .mobile-nav button.selected {
-        background-color: #d0d0d0;
-        font-weight: bold;
-    }
-
-    .data-table th, .data-table td {
-        padding: 4px;
-        font-size: 12px;
-    }
-
-    .data-table {
-        width: 100%;
-        overflow-x: auto;
-        display: block;
-    }
-
-    .data-table th, .data-table td {
-        white-space: nowrap;
     }
 }
