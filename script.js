@@ -32,11 +32,19 @@ function buildHierarchy(data) {
         if (item.Parent === "") {
             root.name = key; // Set root name
         } else if (item.Parent === "Services") {    
-            root.children.push({ name: key, value: item.Size, spending: item.Spending }); // Add children to root with spending
+            root.children.push({
+                name: key,
+                value: item.Size,
+                data: {
+                    spending: item.Spending,
+                    department: item.Department,
+                }
+            }); // Add children to root with size, spending, and department
         }
     });
     return root;
 }
+
 
 // Updates header text
 function updateHeader(title) {
@@ -53,7 +61,7 @@ function updateHeader(title) {
 function drawTreeMap(data, transition = false) {
     const chartDiv = document.getElementById('d3_chart_div');
     chartDiv.style.display = 'block';
-    chartDiv.style.opacity = 0;  // Added to set initial opacity to 0
+    chartDiv.style.opacity = 1;  // Set initial opacity to 1
     document.getElementById('table_div').style.display = 'none';
     highlightSelectedViewButton('tree');
 
@@ -100,15 +108,6 @@ function drawTreeMap(data, transition = false) {
         .attr("width", d => d.x1 - d.x0)
         .attr("height", d => d.y1 - d.y0);
 
-    if (transition) {
-        d3.select("#d3_chart_div")
-            .transition()  // Added to apply transition
-            .duration(750)
-            .style("opacity", 1);  // Added to transition opacity to 1
-    } else {
-        chartDiv.style.opacity = 1;
-    }
-
     node.append("text")
         .attr("x", d => (d.x1 - d.x0) / 2)
         .attr("y", d => (d.y1 - d.y0) / 2)
@@ -116,9 +115,9 @@ function drawTreeMap(data, transition = false) {
         .attr("class", "node-text")
         .style("text-anchor", "middle")
         .text(d => d.data.name)
-        .call(wrapText, function(d) { return d.x1 - d.x0 - 2 * paddingLeft; });
+        .call(wrapText, d => d.x1 - d.x0 - 2);
 
-    node.filter(d => d.value >= 250000)
+    node.filter(d => d.value >= 300000)
         .append("text")
         .attr("x", d => (d.x1 - d.x0) / 2)
         .attr("y", d => (d.y1 - d.y0) / 2 + 20)
@@ -129,6 +128,7 @@ function drawTreeMap(data, transition = false) {
 }
 
 
+
 // Draws table
 function drawTable(data) {
     document.getElementById('d3_chart_div').style.display = 'none';
@@ -137,7 +137,9 @@ function drawTable(data) {
 
     const flatData = data.children.map(d => ({
         name: d.name,
-        value: d.value
+        size: d.value,
+        spending: d.data.spending,
+        department: d.data.department
     }));
 
     const tableDiv = d3.select("#table_div");
@@ -149,7 +151,7 @@ function drawTable(data) {
 
     thead.append("tr")
         .selectAll("th")
-        .data(["Service Name", "Enrolled"])
+        .data(["Name", "Size", "Spending", "Department"])
         .enter()
         .append("th")
         .text(d => d);
@@ -167,7 +169,7 @@ function drawTable(data) {
         });
 
     rows.selectAll("td")
-        .data(d => [d.name, d.value])
+        .data(d => [d.name, d.size, d.spending, d.department])
         .enter()
         .append("td")
         .text(d => d);
@@ -176,6 +178,8 @@ function drawTable(data) {
         .duration(750)
         .style("opacity", 1);
 }
+
+
 
 function handleNodeClick(d) {
     if (d.data.name === "Other") {
@@ -219,6 +223,8 @@ function wrapText(text, width) {
         text.attr('y', +y + (boxHeight - textHeight) / 2);
     });
 }
+
+
 
 // Highlight selected view button
 function highlightSelectedViewButton(view) {

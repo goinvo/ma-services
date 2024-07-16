@@ -3,48 +3,49 @@
     "Parent": "",
     "Size": 0,
     "Spending": 0,
-    "Color ": 0
+    "Color ": 0,
+    "Department": 0
   },
   "MassHealth": {
     "Parent": "Services",
     "Size": 2127026,
     "Spending": 19170000000,
     "Color ": 10,
-    "Stat":"2M"
+    "Department": "EOHHS"
   },
   "SNAP": {
     "Parent": "Services",
     "Size": 1083392,
     "Spending": 60000000,
-    "Color ": 4,
-    "Stat":"1M"
+    "Color ": 3,
+    "Department": "DTA"
   },
   "LIHEAP": {
     "Parent": "Services",
     "Size": 320000,
     "Spending": 150000000,
     "Color ": 5,
-    "Stat":"320K"
-  },
-  "SSDI": {
-    "Parent": "Services",
-    "Size": 282000,
-    "Spending": 30000000,
-    "Color ": 3,
-    "Stat":"280k"
+    "Department": "EOHLC"
   },
   "SSI": {
     "Parent": "Services",
     "Size": 213000,
     "Spending": 200000000,
-    "Color ": 7,
-    "Stat":"213K"
+    "Color ": 6,
+    "Department": "MRC"
+  },
+  "Education": {
+    "Parent": "Services",
+    "Size": 896103,
+    "Spending": 524000000,
+    "Color ": 9,
+    "Department": "EOE"
   },
   "Other": {
     "Parent": "Services",
     "Size": 188729,
     "Spending": 463000000,
     "Color ": 8,
-    "Stat":"190K"
+    "Department": "N/A"
   }
 }

@@ -1,32 +1,37 @@
 {
   "Services": {
-    "Parent": "0",
+    "Parent": "",
     "Size": 0,
     "Spending": 0,
-    "Color ": 0
-  },
-  "EAEDC": {
-    "Parent": "Services",
-    "Size": 28070,
-    "Spending": 95000000,
-    "Color ": 8
-  },
-  "Veterans Benefits": {
-    "Parent": "Services",
-    "Size": 68000,
-    "Spending": 68000000,
-    "Color ": 5
+    "Color ": 0,
+    "Department": 0
   },
   "Unemployment Insurance": {
     "Parent": "Services",
     "Size": 120000,
     "Spending": 1500000000,
-    "Color ": 9
+    "Color ": 10,
+    "Department": "DUA"
+  },
+  "EAEDC": {
+    "Parent": "Services",
+    "Size": 28070,
+    "Spending": 194200000,
+    "Color ": 6,
+    "Department": "DTA"
+  },
+  "MASSVETS": {
+    "Parent": "Services",
+    "Size": 69565,
+    "Spending": 108868801,
+    "Color ": 4,
+    "Department": "EOVS"
   },
   "TAFDC": {
     "Parent": "Services",
     "Size": 92659,
-    "Spending": 300000000,
-    "Color ": 10
+    "Spending": 424300000,
+    "Color ": 8,
+    "Department": "DTA"
   }
 }
