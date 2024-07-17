@@ -44,6 +44,15 @@
     "RoundSize": "213 K",
     "RoundSpend": "200 M"
   },
+  "SSIFake": {
+    "Parent": "Services",
+    "Size": 213000,
+    "Spending": 200000000,
+    "Color ": 6,
+    "Department": "MRC",
+    "RoundSize": "213 K",
+    "RoundSpend": "200 M"
+  },
   "Education": {
     "Parent": "Services",
     "Size": 896103,

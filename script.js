@@ -182,19 +182,14 @@ function drawTreeMap(data, transition = false) {
     });
 }
 
-
-
-
-
 /**
  * drawTable(data)
  * Draws the table visualization.
  * @param {object} data - The hierarchical data to visualize.
  */
 function drawTable(data) {
-    const tableDiv = d3.select("#table_div");
-    tableDiv.style("display", "block"); // Display the table div
     document.getElementById('d3_chart_div').style.display = 'none'; // Hide the chart div
+    document.getElementById('table_div').style.display = 'block'; // Display the table div
     highlightSelectedViewButton('table'); // Highlight the table view button
 
     const flatData = data.children.map(d => ({
@@ -206,6 +201,7 @@ function drawTable(data) {
 
     const format = d3.format(","); // Create number formatter for commas
 
+    const tableDiv = d3.select("#table_div"); // Select the table div
     tableDiv.html(""); // Clear previous contents
 
     const table = tableDiv.append("table").attr("class", "data-table"); // Append table element
@@ -241,7 +237,6 @@ function drawTable(data) {
         .duration(750) // Set duration
         .style("opacity", 1); // Set opacity
 }
-
 
 
 /**
