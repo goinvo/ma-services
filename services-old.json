@@ -4,62 +4,48 @@
     "Size": 0,
     "Spending": 0,
     "Color ": 0,
-    "Department": 0,
-    "RoundSize": "0",
-    "RoundSpend": "0"
+    "Department": 0
   },
   "MassHealth": {
     "Parent": "Services",
     "Size": 2127026,
     "Spending": 19170000000,
     "Color ": 10,
-    "Department": "EOHHS",
-    "RoundSize": "2.13 M",
-    "RoundSpend": "19.2 B"
+    "Department": "EOHHS"
   },
   "SNAP": {
     "Parent": "Services",
     "Size": 1083392,
     "Spending": 60000000,
     "Color ": 3,
-    "Department": "DTA",
-    "RoundSize": "1.08 M",
-    "RoundSpend": "60 M"
+    "Department": "DTA"
   },
   "LIHEAP": {
     "Parent": "Services",
     "Size": 320000,
     "Spending": 150000000,
     "Color ": 5,
-    "Department": "EOHLC",
-    "RoundSize": "320 K",
-    "RoundSpend": "150 M"
+    "Department": "EOHLC"
   },
   "SSI": {
     "Parent": "Services",
     "Size": 213000,
     "Spending": 200000000,
     "Color ": 6,
-    "Department": "MRC",
-    "RoundSize": "213 K",
-    "RoundSpend": "200 M"
+    "Department": "MRC"
   },
   "Education": {
     "Parent": "Services",
     "Size": 896103,
     "Spending": 524000000,
     "Color ": 9,
-    "Department": "EOE",
-    "RoundSize": "896 K",
-    "RoundSpend": "524 M"
+    "Department": "EOE"
   },
   "Other": {
     "Parent": "Services",
     "Size": 188729,
     "Spending": 463000000,
     "Color ": 8,
-    "Department": "N/A",
-    "RoundSize": "189 K",
-    "RoundSpend": "463 M"
+    "Department": "N/A"
   }
 }

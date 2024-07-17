@@ -47,6 +47,8 @@ function buildHierarchy(data) {
             color: data[key].Color,
             department: data[key].Department,
             parent: data[key].Parent,
+            roundSize: data[key].RoundSize, // Add RoundSize
+            roundSpend: data[key].RoundSpend, // Add RoundSpend
             children: []
         });
     });
@@ -143,22 +145,22 @@ function drawTreeMap(data, transition = false) {
         .text(d => d.data.name) // Set text
         .call(wrapText, d => d.x1 - d.x0 - 2); // Call wrapText function
 
-    node.append("text") // Append text element for size
+    node.append("text") // Append text element for round size
         .attr("x", d => (d.x1 - d.x0) / 2) // Set x position
         .attr("y", d => (d.y1 - d.y0) / 2 + 10) // Set y position
         .attr("fill", "black") // Set fill color
         .attr("class", "node-text") // Set class
         .style("text-anchor", "middle") // Set text anchor
-        .text(d => `Size: ${format(d.value)}`) // Set text
+        .text(d => `Size: ${d.data.roundSize}`) // Set text
         .call(wrapText, d => d.x1 - d.x0 - 2); // Call wrapText function
 
-    node.append("text") // Append text element for spending
+    node.append("text") // Append text element for round spend
         .attr("x", d => (d.x1 - d.x0) / 2) // Set x position
         .attr("y", d => (d.y1 - d.y0) / 2 + 30) // Set y position
         .attr("fill", "black") // Set fill color
         .attr("class", "node-text") // Set class
         .style("text-anchor", "middle") // Set text anchor
-        .text(d => `Spending: $${format(d.data.spending)}`) // Set text
+        .text(d => `Spending: $${d.data.roundSpend}`) // Set text
         .call(wrapText, d => d.x1 - d.x0 - 2); // Call wrapText function
 }
 
@@ -178,6 +180,8 @@ function drawTable(data) {
         spending: d.spending,
         department: d.department
     })); // Flatten the hierarchical data
+
+    const format = d3.format(","); // Create number formatter for commas
 
     const tableDiv = d3.select("#table_div"); // Select the table div
     tableDiv.html(""); // Clear previous contents
@@ -206,7 +210,7 @@ function drawTable(data) {
         });
 
     rows.selectAll("td") // Select all cells
-        .data(d => [d.name, d.size, d.spending, d.department]) // Bind data
+        .data(d => [d.name, format(d.size), format(d.spending), d.department]) // Bind data and format size and spending
         .enter() // Enter selection
         .append("td") // Append cells
         .text(d => d); // Set text
@@ -215,6 +219,7 @@ function drawTable(data) {
         .duration(750) // Set duration
         .style("opacity", 1); // Set opacity
 }
+
 
 /**
  * handleNodeClick(d)
