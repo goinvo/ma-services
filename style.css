@@ -211,6 +211,7 @@ h2 {
 /* Styling for the table container */
 #table_div {
     width: 100%;
+    display: block;
 }
 
 /* Mobile navigation */
@@ -326,5 +327,7 @@ h2 {
     #table_div .data-table th, #table_div .data-table td {
         padding: 12px; /* More padding for desktop */
     }
+
+    
 }
 

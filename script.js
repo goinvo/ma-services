@@ -75,7 +75,7 @@ function updateHeader(title) {
     document.getElementById('back-button').addEventListener('click', function() { // Add click event to back button
         loadData('services.json'); // Load the main data file
         currentFile = 'services.json'; // Set current file to main data file
-        updateHeader("All Massachusetts Services"); // Update header text
+        updateHeader("All Services"); // Update header text
         document.getElementById('back-button').style.display = 'none'; // Hide back button
     });
 }
@@ -136,33 +136,55 @@ function drawTreeMap(data, transition = false) {
         .attr("width", d => d.x1 - d.x0) // Set width
         .attr("height", d => d.y1 - d.y0); // Set height
 
-    node.append("text") // Append text element for name
-        .attr("x", d => (d.x1 - d.x0) / 2) // Set x position
-        .attr("y", d => (d.y1 - d.y0) / 2 - 10) // Set y position
-        .attr("fill", "black") // Set fill color
-        .attr("class", "node-text") // Set class
-        .style("text-anchor", "middle") // Set text anchor
-        .text(d => d.data.name) // Set text
-        .call(wrapText, d => d.x1 - d.x0 - 2); // Call wrapText function
+    const padding = 5; // Set padding around text
 
-    node.append("text") // Append text element for round size
-        .attr("x", d => (d.x1 - d.x0) / 2) // Set x position
-        .attr("y", d => (d.y1 - d.y0) / 2 + 10) // Set y position
-        .attr("fill", "black") // Set fill color
-        .attr("class", "node-text") // Set class
-        .style("text-anchor", "middle") // Set text anchor
-        .text(d => `Size: ${d.data.roundSize}`) // Set text
-        .call(wrapText, d => d.x1 - d.x0 - 2); // Call wrapText function
+    node.each(function(d) {
+        const group = d3.select(this); // Select the current group
 
-    node.append("text") // Append text element for round spend
-        .attr("x", d => (d.x1 - d.x0) / 2) // Set x position
-        .attr("y", d => (d.y1 - d.y0) / 2 + 30) // Set y position
-        .attr("fill", "black") // Set fill color
-        .attr("class", "node-text") // Set class
-        .style("text-anchor", "middle") // Set text anchor
-        .text(d => `Spending: $${d.data.roundSpend}`) // Set text
-        .call(wrapText, d => d.x1 - d.x0 - 2); // Call wrapText function
+        // Calculate the appropriate font size for name text
+        const nameFontSize = Math.min((d.x1 - d.x0) / 10, (d.y1 - d.y0) / 3);
+        // Calculate a smaller font size for enrolled and spent text
+        const smallFontSize = nameFontSize * 0.8;
+        const lineHeight = smallFontSize * 1.5;
+
+        // Add name text
+        group.append("text")
+            .attr("x", (d.x1 - d.x0) / 2)
+            .attr("y", (d.y1 - d.y0) / 2 - lineHeight)
+            .attr("fill", "black")
+            .attr("class", "node-text")
+            .style("text-anchor", "middle")
+            .style("font-size", nameFontSize + 'px')
+            .text(d.data.name)
+            .call(wrapText, d.x1 - d.x0 - padding * 2);
+
+        // Add rounded size text with "enrolled"
+        group.append("text")
+            .attr("x", (d.x1 - d.x0) / 2)
+            .attr("y", (d.y1 - d.y0) / 2)
+            .attr("fill", "black")
+            .attr("class", "node-text-enrolled")
+            .style("text-anchor", "middle")
+            .style("font-size", smallFontSize + 'px')
+            .text(`${d.data.roundSize} enrolled`)
+            .call(wrapText, d.x1 - d.x0 - padding * 2);
+
+        // Add rounded spend text with "spent"
+        group.append("text")
+            .attr("x", (d.x1 - d.x0) / 2)
+            .attr("y", (d.y1 - d.y0) / 2 + lineHeight)
+            .attr("fill", "black")
+            .attr("class", "node-text-enrolled")
+            .style("text-anchor", "middle")
+            .style("font-size", smallFontSize + 'px')
+            .text(`$${d.data.roundSpend} spent`)
+            .call(wrapText, d.x1 - d.x0 - padding * 2);
+    });
 }
+
+
+
+
 
 /**
  * drawTable(data)
@@ -170,8 +192,9 @@ function drawTreeMap(data, transition = false) {
  * @param {object} data - The hierarchical data to visualize.
  */
 function drawTable(data) {
+    const tableDiv = d3.select("#table_div");
+    tableDiv.style("display", "block"); // Display the table div
     document.getElementById('d3_chart_div').style.display = 'none'; // Hide the chart div
-    document.getElementById('table_div').style.display = 'block'; // Display the table div
     highlightSelectedViewButton('table'); // Highlight the table view button
 
     const flatData = data.children.map(d => ({
@@ -183,7 +206,6 @@ function drawTable(data) {
 
     const format = d3.format(","); // Create number formatter for commas
 
-    const tableDiv = d3.select("#table_div"); // Select the table div
     tableDiv.html(""); // Clear previous contents
 
     const table = tableDiv.append("table").attr("class", "data-table"); // Append table element
@@ -219,6 +241,7 @@ function drawTable(data) {
         .duration(750) // Set duration
         .style("opacity", 1); // Set opacity
 }
+
 
 
 /**
@@ -315,7 +338,7 @@ function highlightSelectedFilterButton(filter) {
  */
 document.addEventListener("DOMContentLoaded", function() {
     loadData('services.json'); // Load the main data file
-    updateHeader("All Massachusetts Services"); // Update header text
+    updateHeader("All Services"); // Update header text
     setupEventListeners(); // Setup event listeners
     highlightSelectedFilterButton("all"); // Highlight all services button
     highlightSelectedViewButton("tree"); // Highlight tree view button
@@ -327,13 +350,13 @@ document.addEventListener("DOMContentLoaded", function() {
  */
 function setupEventListeners() {
     const actions = [
-        { id: 'back-button', file: 'services.json', header: 'All Massachusetts Services', showBackButton: false },
-        { id: 'all-services-button', file: 'services.json', header: 'All Massachusetts Services', showBackButton: false },
+        { id: 'back-button', file: 'services.json', header: 'All Services', showBackButton: false },
+        { id: 'all-services-button', file: 'services.json', header: 'All Services', showBackButton: false },
         { id: 'eligibility-button', file: 'elig.json', header: 'Eligibility Services', showBackButton: true },
         { id: 'see-code-button', action: () => window.open('https://github.com/goinvo/ma-services', '_blank') },
         { id: 'tree-view-button', action: () => drawTreeMap(currentData) },
         { id: 'table-view-button', action: () => drawTable(currentData) },
-        { id: 'all-services-button-mobile', file: 'services.json', header: 'All Massachusetts Services', showBackButton: false },
+        { id: 'all-services-button-mobile', file: 'services.json', header: 'All Services', showBackButton: false },
         { id: 'eligibility-button-mobile', file: 'elig.json', header: 'Eligibility Services', showBackButton: true },
         { id: 'tree-view-button-mobile', action: () => drawTreeMap(currentData) },
         { id: 'table-view-button-mobile', action: () => drawTable(currentData) },
