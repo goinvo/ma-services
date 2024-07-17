@@ -142,10 +142,10 @@ function drawTreeMap(data, transition = false) {
         const group = d3.select(this); // Select the current group
 
         // Calculate the appropriate font size for name text
-        const nameFontSize = Math.min((d.x1 - d.x0) / 10, (d.y1 - d.y0) / 3);
+        const nameFontSize = Math.min((d.x1 - d.x0) / 10, (d.y1 - d.y0) / 3.3);
         // Calculate a smaller font size for enrolled and spent text
         const smallFontSize = nameFontSize * 0.8;
-        const lineHeight = smallFontSize * 1.5;
+        const lineHeight = smallFontSize * 1.1;
 
         // Add name text
         group.append("text")
