@@ -143,41 +143,41 @@ h2 {
 }
 
 .main {
-    flex: 1;
-    padding: 10px;
-    overflow-y: auto;
     display: flex;
-    flex-direction: column;
+    flex: 1;
 }
 
 #d3_chart_div {
     flex: 1;
-    width: 100%;
+    width: 75%; /* 3 out of 4 columns */
     height: 300px;
+    padding: 10px;
 }
 
-#info {
-    margin-top: 10px;
-    font-size: 12px;
-    font-weight: 600;
-    text-align: center;
-    color: black;
-    min-height: 50px;
+.sidebar {
+    width: 25%; /* 1 out of 4 columns */
+    padding: 10px;
+    background: white; /* Set background to white */
+    border-left: var(--header-border);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.legend-title {
-    font-family: var(--font-family);
-    font-size: 12px;
-    font-weight: bold;
-    text-anchor: middle;
-    fill: black;
+.sidebar h2 {
+    text-align: center; /* Center the name at the top */
+    font-size: 24px;
+    margin-bottom: 20px;
 }
 
-.node-text-enrolled,
-.node-text {
-    font-size: 12px;   /* Smaller font for mobile */
-    text-align: center;
+.sidebar p {
+    text-align: left;
+    padding: 10px;
+    font-size: 16px;
+    line-height: 1.5;
 }
+
 
 /* Table styling */
 .data-table {
@@ -211,14 +211,13 @@ h2 {
 
 /* Table rows with links */
 .data-table a {
-    color: var( --link-color);
+    color: var(--link-color);
     text-decoration: none;
 }
 
 .data-table a:hover {
     text-decoration: underline;
 }
-
 
 /* Styling for the table container */
 #table_div {
@@ -295,9 +294,13 @@ h2 {
         padding: 20px;
     }
 
+    .sidebar {
+        width: 25%; /* 1 out of 4 columns */
+    }
+
     #d3_chart_div {
         flex: 1;
-        width: 100%;
+        width: 75%; /* 3 out of 4 columns */
         height: 400px;
     }    
 
@@ -312,9 +315,13 @@ h2 {
         display: flex; /* Show nav on desktop */
     }
 
+    .sidebar {
+        width: 25%; /* 1 out of 4 columns */
+    }
+
     #d3_chart_div {
         flex: 1;
-        width: 100%;
+        width: 75%; /* 3 out of 4 columns */
         height: 600px;
     }    
 
@@ -348,5 +355,35 @@ h2 {
         font-size: 2cqw; /* Makes table larger on desktop */
     }
 
+    .sidebar {
+        width: 25%; /* 1 out of 4 columns */
+        padding: 10px;
+        background: white; /* Set background to white */
+        border-left: var(--header-border);
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .sidebar h2 {
+        text-align: left;
+        font-size: 24px;
+        margin-bottom: 18px;
+        padding: 10px;
+    }
+    
+    .sidebar p{
+        text-align: left;
+        padding: 10px;
+        font-size: 16px;
+        line-height: 10px;
+    }
+
 }
 
+/* Sidebar styling for mobile */
+@media (max-width: 600px) {
+    .sidebar {
+        display: none; /* Hide sidebar on mobile */
+    }
+}

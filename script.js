@@ -4,28 +4,31 @@ let currentFile = 'services.json'; // Variable to track the current data file
 
 /**
  * loadData(jsonFile)
- * Loads data from a specified JSON file and draws the initial view.
+ * Loads data from a specified JSON file and draws the initial view with a fade-in effect.
  * @param {string} jsonFile - The path to the JSON file.
  */
 function loadData(jsonFile) {
-    fetch(jsonFile + '?_=' + new Date().getTime()) // Fetch the JSON file with a unique query to disable caching
-        .then(response => response.json()) // Parse the response as JSON
-        .then(data => {
-            currentData = buildHierarchy(data); // Convert flat data to hierarchical
-            if (currentView === 'tree') { // Check if the current view is 'tree'
-                drawTreeMap(currentData, true); // Draw the tree map
-            } else {
-                drawTable(currentData); // Draw the table
-            }
-            window.addEventListener('resize', () => { // Add event listener to handle window resize
-                if (currentView === 'tree') {
-                    drawTreeMap(currentData, false); // Redraw tree map on resize
+    fade('#d3_chart_div, #table_div', 250, () => {
+        clearSidebar(); // Clear the sidebar content
+        fetch(jsonFile + '?_=' + new Date().getTime()) // Fetch the JSON file with a unique query to disable caching
+            .then(response => response.json()) // Parse the response as JSON
+            .then(data => {
+                currentData = buildHierarchy(data); // Convert flat data to hierarchical
+                if (currentView === 'tree') { // Check if the current view is 'tree'
+                    drawTreeMap(currentData, true); // Draw the tree map
                 } else {
-                    drawTable(currentData); // Redraw table on resize
+                    drawTable(currentData); // Draw the table
                 }
-            });
-        })
-        .catch(error => console.error('Error fetching data:', error)); // Log any errors
+                window.addEventListener('resize', () => { // Add event listener to handle window resize
+                    if (currentView === 'tree') {
+                        drawTreeMap(currentData, false); // Redraw tree map on resize
+                    } else {
+                        drawTable(currentData); // Redraw table on resize
+                    }
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error)); // Log any errors
+    });
 }
 
 /**
@@ -91,6 +94,7 @@ function drawTreeMap(data, transition = false) {
     chartDiv.style.display = 'block'; // Display the chart div
     chartDiv.style.opacity = 1; // Set initial opacity to 1
     document.getElementById('table_div').style.display = 'none'; // Hide the table div
+    document.getElementById('statistics').style.display = 'block'; // Show the statistics sidebar
     highlightSelectedViewButton('tree'); // Highlight the tree view button
 
     const container = document.getElementById('d3_chart_div'); // Get the chart container
@@ -183,6 +187,45 @@ function drawTreeMap(data, transition = false) {
 }
 
 /**
+ * handleNodeClick(d)
+ * Handles click events on tree map nodes.
+ * @param {object} d - The clicked node data.
+ */
+function handleNodeClick(d) {
+    if (d.data.name === "Other") { // Check if the node name is 'Other'
+        loadData('other.json'); // Load other data file
+        currentFile = 'other.json'; // Set current file to other data file
+        updateHeader("Other Services"); // Update header text
+    } else {
+        displayNodeInfo(d.data); // Display node info in the sidebar
+    }
+}
+
+/**
+ * displayNodeInfo(data)
+ * Displays the node information in the statistics sidebar.
+ * @param {object} data - The data of the clicked node.
+ */
+function displayNodeInfo(data) {
+    const statisticsDiv = document.getElementById('statistics');
+    statisticsDiv.innerHTML = `
+        <h2>${data.name}</h2>
+        <p><strong>People:</strong> ${data.roundSize}</p>
+        <p><strong>Spend:</strong> $${data.roundSpend}</p>
+        <p><strong>Department:</strong> ${data.department}</p>
+    `;
+}
+
+/**
+ * clearSidebar()
+ * Clears the content of the sidebar.
+ */
+function clearSidebar() {
+    const statisticsDiv = document.getElementById('statistics');
+    statisticsDiv.innerHTML = '';
+}
+
+/**
  * drawTable(data)
  * Draws the table visualization.
  * @param {object} data - The hierarchical data to visualize.
@@ -190,6 +233,7 @@ function drawTreeMap(data, transition = false) {
 function drawTable(data) {
     document.getElementById('d3_chart_div').style.display = 'none'; // Hide the chart div
     document.getElementById('table_div').style.display = 'block'; // Display the table div
+    document.getElementById('statistics').style.display = 'none'; // Hide the statistics sidebar
     highlightSelectedViewButton('table'); // Highlight the table view button
 
     const flatData = data.children.map(d => ({
@@ -223,7 +267,7 @@ function drawTable(data) {
 
     rows.selectAll("td") // Select all cells
         .data(d => [
-            d.name === 'Other' ? d.name : `<a href="${d.site}" target="_blank" class="service-link">${d.name}</a>`, // Create link for Service column with class, no link for 'Other'
+            d.name === 'Other' ? d.name : `<a href="${d.site}" target="_blank" class="service-link">${d.name}</a>`, // Links to mass gov page, no link for other
             format(d.size),
             `$${format(d.spending)}`, // Add $ in front of spending
             d.department
@@ -235,25 +279,6 @@ function drawTable(data) {
     tableDiv.transition() // Add transition effect
         .duration(750) // Set duration
         .style("opacity", 1); // Set opacity
-}
-
-
-
-
-/**
- * handleNodeClick(d)
- * Handles click events on tree map nodes.
- * @param {object} d - The clicked node data.
- */
-function handleNodeClick(d) {
-    if (d.data.name === "Other") { // Check if the node name is 'Other'
-        zoom(d); // Initiate zoom transition
-        setTimeout(() => { // Set timeout for transition
-            loadData('other.json'); // Load other data file
-            currentFile = 'other.json'; // Set current file to other data file
-            updateHeader("Other Services"); // Update header text
-        }, 750); // Load new data after the zoom transition
-    }
 }
 
 /**
@@ -382,39 +407,21 @@ function setupEventListeners() {
 }
 
 /**
- * zoom(d)
- * Zooms into a node on the tree map.
- * @param {object} d - The node data to zoom into.
+ * fade(selector, duration, callback)
+ * Fades out the specified elements, then executes the callback, and fades the elements back in.
+ * @param {string} selector - The selector of the elements to fade.
+ * @param {number} duration - The duration of the fade effect.
+ * @param {function} callback - The callback function to execute after fade-out.
  */
-function zoom(d) {
-    const chartDiv = document.getElementById('d3_chart_div'); // Get the chart div
-    const width = chartDiv.clientWidth; // Get chart width
-    const height = chartDiv.clientHeight; // Get chart height
-
-    const x = d3.scaleLinear() // Create x scale
-        .domain([d.x0, d.x1]) // Set domain
-        .range([0, width]); // Set range
-    
-    const y = d3.scaleLinear() // Create y scale
-        .domain([d.y0, d.y1]) // Set domain
-        .range([0, height]); // Set range
-
-    const svg = d3.select("#d3_chart_div svg"); // Select the SVG element
-
-    const t = svg.transition() // Create transition
-        .duration(750) // Set duration
-        .attr("viewBox", `0 0 ${width} ${height}`) // Set viewBox attribute
-        .attr("width", "100%") // Set width
-        .attr("height", "100%"); // Set height
-
-    svg.selectAll("g") // Select all groups
-        .transition(t) // Apply transition
-        .attr("transform", d => `translate(${x(d.x0)},${y(d.y0)})`); // Set transform attribute
-
-    svg.selectAll("rect") // Select all rects
-        .transition(t) // Apply transition
-        .attr("x", d => x(d.x0)) // Set x attribute
-        .attr("y", d => y(d.y0)) // Set y attribute
-        .attr("width", d => x(d.x1) - x(d.x0)) // Set width
-        .attr("height", d => y(d.y1) - y(d.y0)); // Set height
+function fade(selector, duration, callback) {
+    const elements = d3.selectAll(selector);
+    elements.transition()
+        .duration(duration)
+        .style("opacity", 0)
+        .on("end", () => {
+            callback();
+            elements.transition()
+                .duration(duration)
+                .style("opacity", 1);
+        });
 }
