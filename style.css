@@ -21,6 +21,7 @@
     --table-bg: #f2f2f2;
     --table-hover-bg: #f1f1f1;
     --table-alt-bg: #f9f9f9;
+    --link-color: #007385;
 }
 
 /* Body styling */
@@ -207,6 +208,17 @@ h2 {
     background-color: var(--table-hover-bg);
     cursor: pointer; /* Makes rows clickable */
 }
+
+/* Table rows with links */
+.data-table a {
+    color: var( --link-color);
+    text-decoration: none;
+}
+
+.data-table a:hover {
+    text-decoration: underline;
+}
+
 
 /* Styling for the table container */
 #table_div {

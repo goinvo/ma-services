@@ -196,7 +196,8 @@ function drawTable(data) {
         name: d.name,
         size: d.value,
         spending: d.spending,
-        department: d.department
+        department: d.department,
+        site: d.site // Assuming the JSON includes a 'site' key
     })); // Flatten the hierarchical data
 
     const format = d3.format(","); // Create number formatter for commas
@@ -210,7 +211,7 @@ function drawTable(data) {
 
     thead.append("tr") // Append row to thead
         .selectAll("th") // Select all th elements
-        .data(["Name", "Size", "Spending", "Department"]) // Bind data
+        .data(["Service", "Enrolled", "Spend", "Department"]) // Bind data
         .enter() // Enter selection
         .append("th") // Append th elements
         .text(d => d); // Set text
@@ -218,25 +219,25 @@ function drawTable(data) {
     const rows = tbody.selectAll("tr") // Select all rows
         .data(flatData) // Bind data
         .enter() // Enter selection
-        .append("tr") // Append rows
-        .on("click", (event, d) => { // Add click event
-            if (d.name === 'Other') { // Check if the name is 'Other'
-                loadData('other.json'); // Load other data file
-                currentFile = 'other.json'; // Set current file to other data file
-                updateHeader("Other Services"); // Update header text
-            }
-        });
+        .append("tr"); // Append rows
 
     rows.selectAll("td") // Select all cells
-        .data(d => [d.name, format(d.size), format(d.spending), d.department]) // Bind data and format size and spending
+        .data(d => [
+            d.name === 'Other' ? d.name : `<a href="${d.site}" target="_blank" class="service-link">${d.name}</a>`, // Create link for Service column with class, no link for 'Other'
+            format(d.size),
+            `$${format(d.spending)}`, // Add $ in front of spending
+            d.department
+        ]) // Bind data and format size and spending
         .enter() // Enter selection
         .append("td") // Append cells
-        .text(d => d); // Set text
+        .html(d => d); // Set HTML content
     
     tableDiv.transition() // Add transition effect
         .duration(750) // Set duration
         .style("opacity", 1); // Set opacity
 }
+
+
 
 
 /**
@@ -347,12 +348,12 @@ function setupEventListeners() {
     const actions = [
         { id: 'back-button', file: 'services.json', header: 'All Services', showBackButton: false },
         { id: 'all-services-button', file: 'services.json', header: 'All Services', showBackButton: false },
-        { id: 'eligibility-button', file: 'elig.json', header: 'Eligibility Services', showBackButton: true },
+        { id: 'eligibility-button', file: 'elig.json', header: 'Benefits', showBackButton: true },
         { id: 'see-code-button', action: () => window.open('https://github.com/goinvo/ma-services', '_blank') },
         { id: 'tree-view-button', action: () => drawTreeMap(currentData) },
         { id: 'table-view-button', action: () => drawTable(currentData) },
         { id: 'all-services-button-mobile', file: 'services.json', header: 'All Services', showBackButton: false },
-        { id: 'eligibility-button-mobile', file: 'elig.json', header: 'Eligibility Services', showBackButton: true },
+        { id: 'eligibility-button-mobile', file: 'elig.json', header: 'Benefits', showBackButton: true },
         { id: 'tree-view-button-mobile', action: () => drawTreeMap(currentData) },
         { id: 'table-view-button-mobile', action: () => drawTable(currentData) },
         { id: 'see-code-button-mobile', action: () => window.open('https://github.com/goinvo/ma-services', '_blank') }

@@ -5,7 +5,6 @@
     "Spending": 0,
     "Color ": 0,
     "Department": 0,
-    "Site": "",
     "RoundSize": "0",
     "RoundSpend": "0"
   },
@@ -15,7 +14,6 @@
     "Spending": 19170000000,
     "Color ": 10,
     "Department": "EOHHS",
-    "Site": "https://www.mass.gov/topics/masshealth",
     "RoundSize": "2.13M",
     "RoundSpend": "19.2B"
   },
@@ -25,7 +23,6 @@
     "Spending": 60000000,
     "Color ": 1,
     "Department": "DTA",
-    "Site": "https://www.mass.gov/snap-benefits-formerly-food-stamps",
     "RoundSize": "1.08M",
     "RoundSpend": "60M"
   },
@@ -35,7 +32,6 @@
     "Spending": 150000000,
     "Color ": 2,
     "Department": "EOHLC",
-    "Site": "https://www.mass.gov/info-details/learn-about-home-energy-assistance-heap",
     "RoundSize": "320K",
     "RoundSpend": "150M"
   },
@@ -45,7 +41,6 @@
     "Spending": 200000000,
     "Color ": 3,
     "Department": "MRC",
-    "Site": "https://www.mass.gov/info-details/eligibility-for-ssi-and-ssdi",
     "RoundSize": "213K",
     "RoundSpend": "200M"
   },
@@ -54,8 +49,7 @@
     "Size": 896103,
     "Spending": 524000000,
     "Color ": 5,
-    "Department": "ESE",
-    "Site": "https://www.mass.gov/orgs/department-of-elementary-and-secondary-education",
+    "Department": "EOE",
     "RoundSize": "896K",
     "RoundSpend": "524M"
   },
@@ -65,7 +59,6 @@
     "Spending": 463000000,
     "Color ": 5,
     "Department": "N/A",
-    "Site": "",
     "RoundSize": "189K",
     "RoundSpend": "463M"
   }

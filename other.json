@@ -1,47 +1,47 @@
 {
   "Services": {
-    "Parent": "",
-    "Size": 0,
-    "Spending": 0,
-    "Color ": 0,
-    "Department": 0,
-    "RoundSize": 0,
-    "RoundSpend": 0
+  "Parent": "",
+  "Size": 0,
+  "Spending": 0,
+  "Color ": 0,
+  "Department": 0,
+  "RoundSize": 0,
+  "RoundSpend": 0
   },
   "UI": {
-    "Parent": "Services",
-    "Size": 120000,
-    "Spending": 1500000000,
-    "Color ": 10,
-    "Department": "DUA",
-    "RoundSize": "1.5B",
-    "RoundSpend": ""
+  "Parent": "Services",
+  "Size": 120000,
+  "Spending": 1500000000,
+  "Color ": 10,
+  "Department": "DUA",
+  "RoundSize": "120K",
+  "RoundSpend": "1.5B"
   },
   "EAEDC": {
-    "Parent": "Services",
-    "Size": 28070,
-    "Spending": 194200000,
-    "Color ": 3,
-    "Department": "DTA",
-    "RoundSize": "194M",
-    "RoundSpend": ""
+  "Parent": "Services",
+  "Size": 28070,
+  "Spending": 194200000,
+  "Color ": 3,
+  "Department": "DTA",
+  "RoundSize": "28K",
+  "RoundSpend": "194M"
   },
   "MASSVETS": {
-    "Parent": "Services",
-    "Size": 69565,
-    "Spending": 108868801,
-    "Color ": 2,
-    "Department": "EOVS",
-    "RoundSize": "109M",
-    "RoundSpend": ""
+  "Parent": "Services",
+  "Size": 69565,
+  "Spending": 108868801,
+  "Color ": 2,
+  "Department": "EOVS",
+  "RoundSize": "69K",
+  "RoundSpend": "109M"
   },
   "TAFDC": {
-    "Parent": "Services",
-    "Size": 92659,
-    "Spending": 424300000,
-    "Color ": 5,
-    "Department": "DTA",
-    "RoundSize": "424M",
-    "RoundSpend": ""
+  "Parent": "Services",
+  "Size": 92659,
+  "Spending": 424300000,
+  "Color ": 5,
+  "Department": "DTA",
+  "RoundSize": "92K",
+  "RoundSpend": "424M"
   }
 }
