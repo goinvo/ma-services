@@ -52,13 +52,12 @@ function buildHierarchy(data) {
             roundSize: data[key].RoundSize,     // For displaying size rounded, will make this a function later
             roundSpend: data[key].RoundSpend,   // For displaying spending rounded, will make this a function later
             site: data[key].Site,               // URL to Mass.gov site for each service
-            description: data[key].Description, // Description of service, (Testing, not fully added yet)
-            income: data[key].Income,           // Max Income for eligibility (Testing, not fully added yet)
-            age: data[key].Age,                 // Age for eligibility, (Testing, not fully added yet)
-            other: data[key].Other,             // Other factor of eligibility, (Testing, not fully added yet)
+            description: data[key].Description, // Description of service
+            eligibility: data[key].Elig,        // Eligibility criteria
             children: []
         });
     });
+
     dataMap.forEach((value, key) => {           // Second pass to link children to their parents
         if (value.parent === "Services") {      // Check if the node is a child of the root
             root.children.push(value);          // Add to root's children
@@ -208,21 +207,25 @@ function handleNodeClick(d) {
  */
 function displayNodeInfo(data) {
     const statisticsDiv = document.getElementById('statistics');
+    const isAllResidents = data.eligibility === "All Residents";  // For all services file, some services this is not applicable            
+    const eligibility = data.eligibility && typeof data.eligibility === 'object';
+
     statisticsDiv.innerHTML = `
         <h2>${data.name}</h2>
-        <h3><a href="${data.site}">${data.description}</a></h3>
+        <h3><a href="${data.site}" target="_blank">${data.description}</a></h3>
         
         <p>People: ${data.roundSize}</p>
         <p>Spend: $${data.roundSpend}</p>
         <p>Department: ${data.department}</p>
         
+        ${!isAllResidents && eligibility ? `    
         <h3>Eligibility Criteria</h3>
-        <p>Max Income: ${data.income}</p>
-        <p>Age Requirement: ${data.age}</p>
-        <p>Other Requirements: ${data.other}</p>
+        <p>Max Income: ${data.eligibility.Income}</p>
+        <p>Age: ${data.eligibility.Age}</p>
+        <p>Other: ${data.eligibility.Other}</p>
+        ` : ''}
     `;
 }
-
 
 /**
  * clearSidebar()

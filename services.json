@@ -7,21 +7,29 @@
     "Department": 0,
     "Site": "",
     "RoundSize": "0",
-    "RoundSpend": "0"
+    "RoundSpend": "0",
+    "Description": " ",
+    "Elig": {
+      "Income": "20K",
+      "Age": "21 - 64",
+      "Other": "N/A"
+    }
   },
   "MassHealth": {
     "Parent": "Services",
     "Size": 2127026,
     "Spending": 19170000000,
-    "Color ": 10,
+    "Color": 10,
     "Department": "EOHHS",
     "Site": "https://www.mass.gov/topics/masshealth",
     "RoundSize": "2.13M",
     "RoundSpend": "19.2B",
-    "Income": "20K",
     "Description": "Massachusets Medicaid",
-    "Age": "21 - 64",
-    "Other": "N/A"
+    "Elig": {
+      "Income": "$20K",
+      "Age": "21 - 64 years",
+      "Other": "N/A"
+    }
   },
   "SNAP": {
     "Parent": "Services",
@@ -31,7 +39,13 @@
     "Department": "DTA",
     "Site": "https://www.mass.gov/snap-benefits-formerly-food-stamps",
     "RoundSize": "1.08M",
-    "RoundSpend": "60M"
+    "RoundSpend": "60M",
+    "Description": "Supplemental Nutrition Program",
+    "Elig": {
+      "Income": "x",
+      "Age": "x",
+      "Other": "N/A"
+    }
   },
   "LIHEAP": {
     "Parent": "Services",
@@ -41,7 +55,13 @@
     "Department": "EOHLC",
     "Site": "https://www.mass.gov/info-details/learn-about-home-energy-assistance-heap",
     "RoundSize": "320K",
-    "RoundSpend": "150M"
+    "RoundSpend": "150M",
+    "Description": "The Massachusetts Low Income Home Energy Assistance Program",
+    "Elig": {
+      "Income": "x",
+      "Age": "x",
+      "Other": "N/A"
+    }
   },
   "SSI": {
     "Parent": "Services",
@@ -51,7 +71,13 @@
     "Department": "MRC",
     "Site": "https://www.mass.gov/info-details/eligibility-for-ssi-and-ssdi",
     "RoundSize": "213K",
-    "RoundSpend": "200M"
+    "RoundSpend": "200M",
+    "Description": "Supplemental Security Income",
+    "Elig": {
+      "Income": "x",
+      "Age": "x",
+      "Other": "N/A"
+    }
   },
   "Education": {
     "Parent": "Services",
@@ -61,7 +87,9 @@
     "Department": "ESE",
     "Site": "https://www.mass.gov/orgs/department-of-elementary-and-secondary-education",
     "RoundSize": "896K",
-    "RoundSpend": "524M"
+    "RoundSpend": "524M",
+    "Description": "Massachusetts Elementary and Secondary Education",
+    "Elig": "All Residents"
   },
   "Other": {
     "Parent": "Services",
