@@ -9,21 +9,21 @@ let currentFile = 'services.json'; // Variable to track the current data file
  */
 function loadData(jsonFile) {
     fade('#d3_chart_div, #table_div', 250, () => {
-        clearSidebar(); // Clear the sidebar content
-        fetch(jsonFile + '?_=' + new Date().getTime()) // Fetch the JSON file with a unique query to disable caching
-            .then(response => response.json()) // Parse the response as JSON
+        clearSidebar();                                     // Clear the sidebar content
+        fetch(jsonFile + '?_=' + new Date().getTime())      // Fetch the JSON file with a unique query to disable caching
+            .then(response => response.json())              // Parse the response as JSON
             .then(data => {
-                currentData = buildHierarchy(data); // Convert flat data to hierarchical
-                if (currentView === 'tree') { // Check if the current view is 'tree'
-                    drawTreeMap(currentData, true); // Draw the tree map
+                currentData = buildHierarchy(data);         // Convert flat data to hierarchical
+                if (currentView === 'tree') {               // Check if the current view is 'tree'
+                    drawTreeMap(currentData, true);         // Draw the tree map
                 } else {
                     drawTable(currentData); // Draw the table
                 }
-                window.addEventListener('resize', () => { // Add event listener to handle window resize
+                window.addEventListener('resize', () => {   // Add event listener to handle window resize
                     if (currentView === 'tree') {
-                        drawTreeMap(currentData, false); // Redraw tree map on resize
+                        drawTreeMap(currentData, false);    // Redraw tree map on resize
                     } else {
-                        drawTable(currentData); // Redraw table on resize
+                        drawTable(currentData);             // Redraw table on resize
                     }
                 });
             })
@@ -38,34 +38,35 @@ function loadData(jsonFile) {
  * @returns {object} - The hierarchical data.
  */
 function buildHierarchy(data) {
-    const root = { name: "Services", children: [] }; // Root node
-    const dataMap = new Map(); // Map to store data nodes
+    const root = { name: "Services", children: [] };    // Root node
+    const dataMap = new Map();                          // Map to store data nodes
 
-    // First pass to create nodes for each key
-    Object.keys(data).forEach(key => {
-        dataMap.set(key, {
-            name: key,
-            value: data[key].Size,
-            spending: data[key].Spending,
-            color: data[key].Color,
-            department: data[key].Department,
-            parent: data[key].Parent,
-            roundSize: data[key].RoundSize, // Add RoundSize
-            roundSpend: data[key].RoundSpend, // Add RoundSpend
+    Object.keys(data).forEach(key => {          // First pass to create nodes for each key
+        dataMap.set(key, {  
+            name: key,                          // Name of service
+            value: data[key].Size,              // Number of people 
+            spending: data[key].Spending,       // Spending 
+            color: data[key].Color,             // Color of tree map node (based on size)
+            department: data[key].Department,   // Mass.gov department
+            parent: data[key].Parent,           // Parent node for tree map
+            roundSize: data[key].RoundSize,     // For displaying size rounded, will make this a function later
+            roundSpend: data[key].RoundSpend,   // For displaying spending rounded, will make this a function later
+            site: data[key].Site,               // URL to Mass.gov site for each service
+            description: data[key].Description, // Description of service, (Testing, not fully added yet)
+            income: data[key].Income,           // Max Income for eligibility (Testing, not fully added yet)
+            age: data[key].Age,                 // Age for eligibility, (Testing, not fully added yet)
+            other: data[key].Other,             // Other factor of eligibility, (Testing, not fully added yet)
             children: []
         });
     });
-
-    // Second pass to link children to their parents
-    dataMap.forEach((value, key) => {
-        if (value.parent === "Services") { // Check if the node is a child of the root
-            root.children.push(value); // Add to root's children
-        } else if (dataMap.has(value.parent)) { // Check if the parent exists in the map
-            dataMap.get(value.parent).children.push(value); // Add to parent's children
+    dataMap.forEach((value, key) => {           // Second pass to link children to their parents
+        if (value.parent === "Services") {      // Check if the node is a child of the root
+            root.children.push(value);          // Add to root's children
+        } else if (dataMap.has(value.parent)) {                 // Check if the parent exists in the map
+            dataMap.get(value.parent).children.push(value);     // Add to parent's children
         }
     });
-
-    return root; // Return the hierarchical data
+    return root;                                // Return the hierarchical data
 }
 
 /**
@@ -75,11 +76,11 @@ function buildHierarchy(data) {
  */
 function updateHeader(title) {
     document.getElementById('tree-map-header').innerHTML = `<button id="back-button" class="back-button" style="display: ${currentFile === 'other.json' ? 'inline-block' : 'none'};">&lt;</button> ${title}`; // Update header HTML
-    document.getElementById('back-button').addEventListener('click', function() { // Add click event to back button
-        loadData('services.json'); // Load the main data file
-        currentFile = 'services.json'; // Set current file to main data file
-        updateHeader("All Services"); // Update header text
-        document.getElementById('back-button').style.display = 'none'; // Hide back button
+    document.getElementById('back-button').addEventListener('click', function() {   // Add click event to back button
+        loadData('services.json');                                                  // Load the main data file
+        currentFile = 'services.json';                                              // Set current file to main data file
+        updateHeader("All Services");                                               // Update header text
+        document.getElementById('back-button').style.display = 'none';              // Hide back button
     });
 }
 
@@ -90,61 +91,60 @@ function updateHeader(title) {
  * @param {boolean} transition - Whether to apply a transition effect.
  */
 function drawTreeMap(data, transition = false) {
-    const chartDiv = document.getElementById('d3_chart_div'); // Get the chart div
-    chartDiv.style.display = 'block'; // Display the chart div
-    chartDiv.style.opacity = 1; // Set initial opacity to 1
-    document.getElementById('table_div').style.display = 'none'; // Hide the table div
-    document.getElementById('statistics').style.display = 'block'; // Show the statistics sidebar
-    highlightSelectedViewButton('tree'); // Highlight the tree view button
+    const chartDiv = document.getElementById('d3_chart_div');           // Get the chart div
+    chartDiv.style.display = 'block';                                   // Display the chart div
+    chartDiv.style.opacity = 1;                                         // Set initial opacity to 1
+    document.getElementById('table_div').style.display = 'none';        // Hide the table div
+    document.getElementById('statistics').style.display = 'block';      // Show the statistics sidebar
+    highlightSelectedViewButton('tree');                                // Highlight the tree view button
 
-    const container = document.getElementById('d3_chart_div'); // Get the chart container
-    const width = container.clientWidth; // Get container width
-    const height = container.clientHeight; // Get container height
+    const container = document.getElementById('d3_chart_div');          // Get the chart container
+    const width = container.clientWidth;                                // Get container width
+    const height = container.clientHeight;                              // Get container height
 
-    const color = d3.scaleLinear() // Create color scale
-        .domain([0, d3.max(data.children, d => d.value)]) // Set domain
-        .range(["#E6F7FA", "#BBDCE1"]); // Set range
+    const color = d3.scaleLinear()                                      // Create color scale
+        .domain([0, d3.max(data.children, d => d.value)])               // Set domain
+        .range(["#E6F7FA", "#BBDCE1"]);                                 // Set range
 
-    const format = d3.format(","); // Create number formatter
+    const format = d3.format(",");                                      // Create number formatter
 
-    const root = d3.treemap() // Create treemap layout
-        .tile(d3.treemapResquarify) // Set tile method
-        .size([width, height]) // Set size
-        .paddingInner(3) // Set padding
-        .round(true) // Enable rounding
-        (d3.hierarchy(data) // Create hierarchy
-            .sum(d => d.value) // Sum values
-            .sort((a, b) => b.value - a.value)); // Sort nodes
+    const root = d3.treemap()                                           // Create treemap layout
+        .tile(d3.treemapResquarify)                                     // Set tile method
+        .size([width, height])                                          // Set size
+        .paddingInner(3)                                                // Set padding
+        .round(true)                                                    // Enable rounding
+        (d3.hierarchy(data)                                             // Create hierarchy
+            .sum(d => d.value)                                          // Sum values
+            .sort((a, b) => b.value - a.value));                        // Sort nodes
 
-    const svg = d3.select("#d3_chart_div") // Select chart div
-        .html("") // Clear previous contents
-        .append("svg") // Append SVG element
-        .attr("viewBox", `0 0 ${width} ${height}`) // Set viewBox attribute
-        .attr("width", "100%") // Set width
-        .attr("height", "100%") // Set height
-        .attr("style", "font: 10px sans-serif;"); // Set font style
+    const svg = d3.select("#d3_chart_div")                              // Select chart div
+        .html("")                                                       // Clear previous contents
+        .append("svg")                                                  // Append SVG element
+        .attr("viewBox", `0 0 ${width} ${height}`)                      // Set viewBox attribute
+        .attr("width", "100%")                                          // Set width
+        .attr("height", "100%")                                         // Set height
+        .attr("style", "font: 10px sans-serif;");                       // Set font style
 
-    const node = svg.selectAll("g") // Select all groups
-        .data(root.leaves()) // Bind data
-        .join("g") // Create groups
-        .attr("transform", d => `translate(${d.x0},${d.y0})`) // Set position
-        .on("click", (event, d) => handleNodeClick(d)); // Add click event
+    const node = svg.selectAll("g")                                     // Select all groups
+        .data(root.leaves())                                            // Bind data
+        .join("g")                                                      // Create groups
+        .attr("transform", d => `translate(${d.x0},${d.y0})`)           // Set position
+        .on("click", (event, d) => handleNodeClick(d));                 // Add click event
 
-    node.append("title") // Append title element
+    node.append("title")                                                // Append title element
         .text(d => `${d.ancestors().reverse().map(d => d.data.name).join("/")}\n${d.value}`); // Set title text
 
-    node.append("rect") // Append rect element
-        .attr("id", d => (d.leafUid = d.data.name)) // Set ID attribute
-        .attr("fill", d => color(d.value)) // Set fill color
-        .attr("fill-opacity", 0.9) // Set fill opacity
-        .attr("width", d => d.x1 - d.x0) // Set width
-        .attr("height", d => d.y1 - d.y0); // Set height
+    node.append("rect")                                                 // Append rect element
+        .attr("id", d => (d.leafUid = d.data.name))                     // Set ID attribute
+        .attr("fill", d => color(d.value))                              // Set fill color
+        .attr("fill-opacity", 0.9)                                      // Set fill opacity
+        .attr("width", d => d.x1 - d.x0)                                // Set width
+        .attr("height", d => d.y1 - d.y0);                              // Set height
 
-    const padding = 5; // Set padding around text
+    const padding = 5;                                                  // Set padding around text
 
     node.each(function(d) {
-        const group = d3.select(this); // Select the current group
-
+        const group = d3.select(this);                                  // Select the current group
         // Calculate the appropriate font size for name text
         const nameFontSize = Math.min((d.x1 - d.x0) / 10, (d.y1 - d.y0) / 3.3);
         // Calculate a smaller font size for enrolled and spent text
@@ -210,11 +210,19 @@ function displayNodeInfo(data) {
     const statisticsDiv = document.getElementById('statistics');
     statisticsDiv.innerHTML = `
         <h2>${data.name}</h2>
-        <p><strong>People:</strong> ${data.roundSize}</p>
-        <p><strong>Spend:</strong> $${data.roundSpend}</p>
-        <p><strong>Department:</strong> ${data.department}</p>
+        <h3><a href="${data.site}">${data.description}</a></h3>
+        
+        <p>People: ${data.roundSize}</p>
+        <p>Spend: $${data.roundSpend}</p>
+        <p>Department: ${data.department}</p>
+        
+        <h3>Eligibility Criteria</h3>
+        <p>Max Income: ${data.income}</p>
+        <p>Age Requirement: ${data.age}</p>
+        <p>Other Requirements: ${data.other}</p>
     `;
 }
+
 
 /**
  * clearSidebar()
@@ -267,7 +275,7 @@ function drawTable(data) {
 
     rows.selectAll("td") // Select all cells
         .data(d => [
-            d.name === 'Other' ? d.name : `<a href="${d.site}" target="_blank" class="service-link">${d.name}</a>`, // Links to mass gov page, no link for other
+            d.name === 'Other' ? d.name : `<a href="${d.site}" >${d.name}</a>`, // Links to mass gov page, no link for other
             format(d.size),
             `$${format(d.spending)}`, // Add $ in front of spending
             d.department

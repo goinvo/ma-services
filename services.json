@@ -17,7 +17,11 @@
     "Department": "EOHHS",
     "Site": "https://www.mass.gov/topics/masshealth",
     "RoundSize": "2.13M",
-    "RoundSpend": "19.2B"
+    "RoundSpend": "19.2B",
+    "Income": "20K",
+    "Description": "Massachusets Medicaid",
+    "Age": "21 - 64",
+    "Other": "N/A"
   },
   "SNAP": {
     "Parent": "Services",

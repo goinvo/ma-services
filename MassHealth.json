@@ -1,0 +1,16 @@
+{
+    "MassHealth": {
+        "Parent": "Services",
+        "Size": 2127026,
+        "Spending": 19170000000,
+        "Color ": 10,
+        "Department": "EOHHS",
+        "Site": "https://www.mass.gov/topics/masshealth",
+        "RoundSize": "2.13M",
+        "RoundSpend": "19.2B",
+        "Income": "20K",
+        "Description": "Massachusets Medicaid",
+        "Age": "21 - 68",
+        "Other": "N/A"
+    }
+}

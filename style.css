@@ -264,6 +264,13 @@ h2 {
     font-weight: bold;
 }
 
+/* NOT WORKING, I dont want the sidebar to show on mobile devices at all */
+/* Sidebar styling for mobile */ 
+.sidebar {
+    display: none; /* Hide sidebar on mobile */
+}
+
+
 /* Responsive design for tablets */
 @media (min-width: 601px) {
     .header .icon {
@@ -315,10 +322,6 @@ h2 {
         display: flex; /* Show nav on desktop */
     }
 
-    .sidebar {
-        width: 25%; /* 1 out of 4 columns */
-    }
-
     #d3_chart_div {
         flex: 1;
         width: 75%; /* 3 out of 4 columns */
@@ -355,6 +358,7 @@ h2 {
         font-size: 2cqw; /* Makes table larger on desktop */
     }
 
+    /* Sidebar only shows on desktop */
     .sidebar {
         width: 25%; /* 1 out of 4 columns */
         padding: 10px;
@@ -371,6 +375,14 @@ h2 {
         margin-bottom: 18px;
         padding: 10px;
     }
+
+    .sidebar h3 {
+        text-align: left;
+        font-size: 16px;
+        margin-top: 18px;
+        padding: 10px;
+        font-weight: bold;
+    }
     
     .sidebar p{
         text-align: left;
@@ -379,11 +391,15 @@ h2 {
         line-height: 10px;
     }
 
+    .sidebar a {
+        color: black;
+        text-decoration: none;
+    }
+    
+    .sidebar a:hover {
+        color: var(--link-color);
+        text-decoration: underline;
+    }
+
 }
 
-/* Sidebar styling for mobile */
-@media (max-width: 600px) {
-    .sidebar {
-        display: none; /* Hide sidebar on mobile */
-    }
-}
