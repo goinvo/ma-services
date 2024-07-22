@@ -156,7 +156,7 @@ h2 {
 #d3_chart_div {
     flex: 1;
     width: 75%; /* 3 out of 4 columns */
-    height: 700px;
+    height: 600px;
     padding: 10px;
 }
 
