@@ -226,6 +226,9 @@ function displayNodeInfo(data) {
         if (data.eligibility.Other) {
             eligibilityHtml += `<p>Other: ${data.eligibility.Other}</p>`;
         }
+        if (data.eligibility.URL) {
+            eligibilityHtml += `<p><a href="${data.eligibility.URL}" target="_blank" class="apply-now-link">Apply Now!</a></p>`;
+        }        
     }
 
     const formattedValue = data.value.toLocaleString();
@@ -319,6 +322,7 @@ function drawTable(data) {
         .duration(750) // Set duration
         .style("opacity", 1); // Set opacity
 }
+
 
 
 /**

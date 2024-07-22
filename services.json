@@ -25,7 +25,8 @@
     "Elig": {
       "Income": "Unclear!",
       "Age": "Ages 21-64",
-      "Resident": "Massachusets Resident"
+      "Resident": "Massachusets Resident",
+      "URL":"https://www.mass.gov/how-to/apply-for-masshealth-the-health-safety-net-or-the-childrens-medical-security-plan"
     }
   },
   "SNAP": {
@@ -41,7 +42,8 @@
     "Elig": {
       "Income": "$2,510",
       "Benefit": "$3,492",
-      "Resident": "Massachusets Resident"
+      "Resident": "Massachusets Resident",
+      "URL":"https://www.mass.gov/how-to/apply-for-snap-benefits-food-stamps"
     }
   },
   "LIHEAP": {
@@ -56,7 +58,8 @@
     "Description": "The Massachusetts Low Income Home Energy Assistance Program",
     "Elig": {
       "Income": "$49,196",
-      "Resident": "Massachusets Resident"
+      "Resident": "Massachusets Resident",
+      "URL":"https://www.mass.gov/how-to/apply-for-home-heating-and-energy-assistance"
     }
   },
   "SSI": {
@@ -72,7 +75,8 @@
     "Elig": {
       "Income": "$1,433",
       "Age": "Ages 65 and older, or disabled at any age",
-      "Resident": "Massachusets Resident"
+      "Resident": "Massachusets Resident",
+      "URL":"https://www.mass.gov/how-to/apply-for-ssdi-or-ssi-benefits"
     }
   },
   "Education": {
