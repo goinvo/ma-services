@@ -207,25 +207,35 @@ function handleNodeClick(d) {
  */
 function displayNodeInfo(data) {
     const statisticsDiv = document.getElementById('statistics');
-    const isAllResidents = data.eligibility === "All Residents";  // For all services file, some services this is not applicable            
     const eligibility = data.eligibility && typeof data.eligibility === 'object';
+
+    let eligibilityHtml = '';
+    if (eligibility) {
+        if (data.eligibility.Income) {
+            eligibilityHtml += `<p>Max Income: ${data.eligibility.Income}</p>`;
+        }
+        if (data.eligibility.Age) {
+            eligibilityHtml += `<p>Age: ${data.eligibility.Age}</p>`;
+        }
+        if (data.eligibility.Other) {
+            eligibilityHtml += `<p>Other: ${data.eligibility.Other}</p>`;
+        }
+    }
 
     statisticsDiv.innerHTML = `
         <h2>${data.name}</h2>
         <h3><a href="${data.site}" target="_blank">${data.description}</a></h3>
         
-        <p>People: ${data.roundSize}</p>
-        <p>Spend: $${data.roundSpend}</p>
-        <p>Department: ${data.department}</p>
+        ${data.roundSize ? `<p>People: ${data.roundSize}</p>` : ''}
+        ${data.roundSpend ? `<p>Spend: $${data.roundSpend}</p>` : ''}
+        ${data.department ? `<p>Department: ${data.department}</p>` : ''}
         
-        ${!isAllResidents && eligibility ? `    
-        <h3>Eligibility Criteria</h3>
-        <p>Max Income: ${data.eligibility.Income}</p>
-        <p>Age: ${data.eligibility.Age}</p>
-        <p>Other: ${data.eligibility.Other}</p>
-        ` : ''}
+        ${eligibilityHtml ? `<h3>Eligibility Criteria</h3>${eligibilityHtml}` : ''}
     `;
+    statisticsDiv.classList.add('visible'); // for mobile
 }
+
+
 
 /**
  * clearSidebar()
@@ -234,6 +244,7 @@ function displayNodeInfo(data) {
 function clearSidebar() {
     const statisticsDiv = document.getElementById('statistics');
     statisticsDiv.innerHTML = '';
+    statisticsDiv.classList.remove('visible');
 }
 
 /**

@@ -59,8 +59,7 @@
     "Description": "The Massachusetts Low Income Home Energy Assistance Program",
     "Elig": {
       "Income": "x",
-      "Age": "x",
-      "Other": "N/A"
+      "Age": "x"
     }
   },
   "SSI": {
@@ -74,9 +73,6 @@
     "RoundSpend": "200M",
     "Description": "Supplemental Security Income",
     "Elig": {
-      "Income": "x",
-      "Age": "x",
-      "Other": "N/A"
     }
   },
   "Education": {

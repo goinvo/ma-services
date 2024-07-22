@@ -4,8 +4,7 @@
     padding: 0;
     box-sizing: border-box;
 }
-
-/* Variables for reuse */
+/* Variables */
 :root {
     --font-family: 'Open Sans', sans-serif;
     --header-bg: #f8f8f8;
@@ -22,6 +21,13 @@
     --table-hover-bg: #f1f1f1;
     --table-alt-bg: #f9f9f9;
     --link-color: #007385;
+    --sidebar-height-mobile: 40%; /* New variable for sidebar height on mobile */
+}
+
+
+/* Add this to your existing CSS for sidebar */
+.sidebar {
+    display: none !important; /* Hide sidebar on mobile */
 }
 
 /* Body styling */
@@ -301,10 +307,6 @@ h2 {
         padding: 20px;
     }
 
-    .sidebar {
-        width: 25%; /* 1 out of 4 columns */
-    }
-
     #d3_chart_div {
         flex: 1;
         width: 75%; /* 3 out of 4 columns */
@@ -360,45 +362,51 @@ h2 {
 
     /* Sidebar only shows on desktop */
     .sidebar {
+        display: flex !important; /* Show sidebar on tablet and desktop */
         width: 25%; /* 1 out of 4 columns */
         padding: 10px;
-        background: white; /* Set background to white */
+        background: white; 
         border-left: var(--header-border);
         overflow-y: auto;
-        display: flex;
         flex-direction: column;
+        align-items: flex-start !important; 
     }
-    
+
     .sidebar h2 {
-        text-align: left;
-        font-size: 24px;
-        margin-bottom: 18px;
-        padding: 10px;
+        text-align: left !important; 
+        width: 100% !important;
+        font-size: 24px !important;
+        margin-bottom: 10px !important;
+        padding: 10px !important;
     }
 
     .sidebar h3 {
-        text-align: left;
-        font-size: 16px;
-        margin-top: 18px;
-        padding: 10px;
-        font-weight: bold;
+        text-align: left !important; 
+        width: 100% !important; 
+        font-size: 16px !important;
+        margin-top: 18px !important;
+        margin-bottom: 10px !important;
+        padding: 10px !important;
+        font-weight: bold !important;
     }
-    
-    .sidebar p{
-        text-align: left;
-        padding: 10px;
-        font-size: 16px;
-        line-height: 10px;
+
+    .sidebar p {
+        text-align: left !important; 
+        width: 100% !important; 
+        padding: 10px !important;
+        font-size: 16px !important;
+        line-height: 1.0 !important;
+       
     }
 
     .sidebar a {
-        color: black;
-        text-decoration: none;
+        color: black !important;
+        text-decoration: none !important;
     }
-    
+
     .sidebar a:hover {
-        color: var(--link-color);
-        text-decoration: underline;
+        color: var(--link-color) !important;
+        text-decoration: underline !important;
     }
 
 }
