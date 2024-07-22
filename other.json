@@ -97,5 +97,22 @@
       "Other": "You are pregnant or have children under 21",
       "URL":"https://www.mass.gov/how-to/apply-for-emergency-assistance-ea-family-shelter"
     }
-  } 
+  },
+  "WIC": {
+    "Parent": "Services",
+    "Size": 119009,
+    "Spending": 11792643,
+    "Color ": 4,
+    "Site": "https://www.mass.gov/orgs/women-infants-children-nutrition-program",
+    "Department": "DPH",
+    "RoundSize": "119K",
+    "RoundSpend": "11.8M",
+    "Description": "Women, Infants, & Children Nutrition Program",
+    "Elig": {
+      "Income": "$27,861",
+      "Resident": "Massachusetts Resident",
+      "Other": "Children under age 5, a new mom, or pregnant",
+      "URL":"https://www.mass.gov/forms/apply-for-wic-online"
+    }
+  }
 }

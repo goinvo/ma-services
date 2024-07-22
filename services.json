@@ -24,7 +24,7 @@
     "Description": "Massachusetts Medicaid",
     "Elig": {
       "Income": "$20,040",
-      "Age": "Ages 19-64",
+      "Age": "19-64 years",
       "Resident": "Massachusetts Resident",
       "URL":"https://www.mass.gov/how-to/apply-for-masshealth-the-health-safety-net-or-the-childrens-medical-security-plan"
     }
@@ -74,7 +74,7 @@
     "Description": "Supplemental Security Income",
     "Elig": {
       "Income": "$17,196",
-      "Age": "Ages 65 and older, or disabled at any age",
+      "Age": "65 and older, or disabled at any age",
       "Resident": "Massachusetts Resident",
       "URL":"https://www.mass.gov/how-to/apply-for-ssdi-or-ssi-benefits"
     }

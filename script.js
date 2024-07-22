@@ -147,7 +147,7 @@ function drawTreeMap(data, transition = false) {
         group.append("text")
             .attr("x", (d.x1 - d.x0) / 2)
             .attr("y", (d.y1 - d.y0) / 2 - lineHeight + yOffset)
-            .attr("fill", "black")
+            .style("fill", "black")     // color of text, css wont work for this
             .attr("class", "node-text")
             .style("text-anchor", "middle")
             .style("font-size", nameFontSize + 'px')
@@ -157,7 +157,7 @@ function drawTreeMap(data, transition = false) {
         group.append("text")
             .attr("x", (d.x1 - d.x0) / 2)
             .attr("y", (d.y1 - d.y0) / 2 + yOffset)
-            .attr("fill", "black")
+            .style("fill", "#545E5F")   // color of text, css wont work for this
             .attr("class", "node-text-enrolled")
             .style("text-anchor", "middle")
             .style("font-size", smallFontSize + 'px')
@@ -167,7 +167,7 @@ function drawTreeMap(data, transition = false) {
         group.append("text")
             .attr("x", (d.x1 - d.x0) / 2)
             .attr("y", (d.y1 - d.y0) / 2 + lineHeight + yOffset)
-            .attr("fill", "black")
+            .style("fill", "#545E5F")   // color of text, css wont work for this
             .attr("class", "node-text-enrolled")
             .style("text-anchor", "middle")
             .style("font-size", smallFontSize + 'px')
