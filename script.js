@@ -83,77 +83,70 @@ function updateHeader(title) {
     });
 }
 
-/**
- * drawTreeMap(data, transition)
- * Draws the tree map visualization.
- * @param {object} data - The hierarchical data to visualize.
- * @param {boolean} transition - Whether to apply a transition effect.
- */
 function drawTreeMap(data, transition = false) {
-    const chartDiv = document.getElementById('d3_chart_div');           // Get the chart div
-    chartDiv.style.display = 'block';                                   // Display the chart div
-    chartDiv.style.opacity = 1;                                         // Set initial opacity to 1
-    document.getElementById('table_div').style.display = 'none';        // Hide the table div
-    document.getElementById('statistics').style.display = 'block';      // Show the statistics sidebar
-    highlightSelectedViewButton('tree');                                // Highlight the tree view button
+    const chartDiv = document.getElementById('d3_chart_div');
+    chartDiv.style.display = 'block';
+    chartDiv.style.opacity = 1;
+    document.getElementById('table_div').style.display = 'none';
+    document.getElementById('statistics').style.display = 'block';
+    highlightSelectedViewButton('tree');
 
-    const container = document.getElementById('d3_chart_div');          // Get the chart container
-    const width = container.clientWidth;                                // Get container width
-    const height = container.clientHeight;                              // Get container height
+    const container = document.getElementById('d3_chart_div');
+    const width = container.clientWidth;
+    const height = container.clientHeight;
 
-    const color = d3.scaleLinear()                                      // Create color scale
-        .domain([0, d3.max(data.children, d => d.value)])               // Set domain
-        .range(["#E6F7FA", "#BBDCE1"]);                                 // Set range
+    const color = d3.scaleLinear()
+        .domain([0, d3.max(data.children, d => d.value)])
+        .range(["#E6F7FA", "#BBDCE1"]);
 
-    const format = d3.format(",");                                      // Create number formatter
+    const format = d3.format(",");
 
-    const root = d3.treemap()                                           // Create treemap layout
-        .tile(d3.treemapResquarify)                                     // Set tile method
-        .size([width, height])                                          // Set size
-        .paddingInner(3)                                                // Set padding
-        .round(true)                                                    // Enable rounding
-        (d3.hierarchy(data)                                             // Create hierarchy
-            .sum(d => d.value)                                          // Sum values
-            .sort((a, b) => b.value - a.value));                        // Sort nodes
+    const root = d3.treemap()
+        .tile(d3.treemapResquarify)
+        .size([width, height])
+        .paddingInner(3)
+        .round(true)
+        (d3.hierarchy(data)
+            .sum(d => d.value)
+            .sort((a, b) => b.value - a.value));
 
-    const svg = d3.select("#d3_chart_div")                              // Select chart div
-        .html("")                                                       // Clear previous contents
-        .append("svg")                                                  // Append SVG element
-        .attr("viewBox", `0 0 ${width} ${height}`)                      // Set viewBox attribute
-        .attr("width", "100%")                                          // Set width
-        .attr("height", "100%")                                         // Set height
-        .attr("style", "font: 10px sans-serif;") ;                      // Set font style
+    const svg = d3.select("#d3_chart_div")
+        .html("")
+        .append("svg")
+        .attr("viewBox", `0 0 ${width} ${height}`)
+        .attr("width", "100%")
+        .attr("height", "100%")
+        .attr("style", "font: 10px sans-serif;");
 
-    const node = svg.selectAll("g")                                     // Select all groups
-        .data(root.leaves())                                            // Bind data
-        .join("g")                                                      // Create groups
-        .attr("transform", d => `translate(${d.x0},${d.y0})`)           // Set position
-        .on("click", (event, d) => handleNodeClick(d));                 // Add click event
+    const node = svg.selectAll("g")
+        .data(root.leaves())
+        .join("g")
+        .attr("transform", d => `translate(${d.x0},${d.y0})`)
+        .on("click", (event, d) => handleNodeClick(d));
 
-    node.append("title")                                                // Append title element
-        .text(d => `${d.ancestors().reverse().map(d => d.data.name).join("/")}\n${d.value}`); // Set title text
+    node.append("title")
+        .text(d => `${d.ancestors().reverse().map(d => d.data.name).join("/")}\n${d.value}`);
 
-    node.append("rect")                                                 // Append rect element
-        .attr("id", d => (d.leafUid = d.data.name))                     // Set ID attribute
-        .attr("fill", d => color(d.value))                              // Set fill color
-        .attr("fill-opacity", 0.9)                                      // Set fill opacity
-        .attr("width", d => d.x1 - d.x0)                                // Set width
-        .attr("height", d => d.y1 - d.y0);                              // Set height
+    node.append("rect")
+        .attr("id", d => (d.leafUid = d.data.name))
+        .attr("fill", d => color(d.value))
+        .attr("fill-opacity", 0.9)
+        .attr("width", d => d.x1 - d.x0)
+        .attr("height", d => d.y1 - d.y0);
 
-    const padding = 5;                                                  // Set padding around text
+    const padding = 5;
+    const yOffset = 10; // Offset to move text slightly down
 
     node.each(function(d) {
-        const group = d3.select(this);                                  // Select the current group
-        // Calculate the appropriate font size for name text
+        const group = d3.select(this);
         const nameFontSize = Math.min((d.x1 - d.x0) / 10, (d.y1 - d.y0) / 3.3);
-        // Calculate a smaller font size for enrolled and spent text
         const smallFontSize = nameFontSize * 0.8;
         const lineHeight = smallFontSize * 1.1;
 
-        // Add name text
+        // Adjust y positions here
         group.append("text")
             .attr("x", (d.x1 - d.x0) / 2)
-            .attr("y", (d.y1 - d.y0) / 2 - lineHeight)
+            .attr("y", (d.y1 - d.y0) / 2 - lineHeight + yOffset)
             .attr("fill", "black")
             .attr("class", "node-text")
             .style("text-anchor", "middle")
@@ -161,10 +154,9 @@ function drawTreeMap(data, transition = false) {
             .text(d.data.name)
             .call(wrapText, d.x1 - d.x0 - padding * 2);
 
-        // Add rounded size text with "enrolled"
         group.append("text")
             .attr("x", (d.x1 - d.x0) / 2)
-            .attr("y", (d.y1 - d.y0) / 2)
+            .attr("y", (d.y1 - d.y0) / 2 + yOffset)
             .attr("fill", "black")
             .attr("class", "node-text-enrolled")
             .style("text-anchor", "middle")
@@ -172,10 +164,9 @@ function drawTreeMap(data, transition = false) {
             .text(`${d.data.roundSize} enrolled`)
             .call(wrapText, d.x1 - d.x0 - padding * 2);
 
-        // Add rounded spend text with "spent"
         group.append("text")
             .attr("x", (d.x1 - d.x0) / 2)
-            .attr("y", (d.y1 - d.y0) / 2 + lineHeight)
+            .attr("y", (d.y1 - d.y0) / 2 + lineHeight + yOffset)
             .attr("fill", "black")
             .attr("class", "node-text-enrolled")
             .style("text-anchor", "middle")
@@ -184,6 +175,7 @@ function drawTreeMap(data, transition = false) {
             .call(wrapText, d.x1 - d.x0 - padding * 2);
     });
 }
+
 
 /**
  * handleNodeClick(d)
@@ -215,7 +207,7 @@ function displayNodeInfo(data) {
             eligibilityHtml += `<p>Max Income per Year: ${data.eligibility.Income}</p>`;
         }
         if (data.eligibility.Benefit) {
-            eligibilityHtml += `<p>Benefits per Year: ${data.eligibility.Benefit}</p>`;
+            eligibilityHtml += `<p>Correlated Benefit per Year: ${data.eligibility.Benefit}</p>`;
         }
         if (data.eligibility.Age) {
             eligibilityHtml += `<p>Age: ${data.eligibility.Age}</p>`;
@@ -321,6 +313,7 @@ function drawTable(data) {
     tableDiv.transition() // Add transition effect
         .duration(750) // Set duration
         .style("opacity", 1); // Set opacity
+        
 }
 
 
