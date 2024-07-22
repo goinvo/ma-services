@@ -1,47 +1,80 @@
 {
   "Services": {
-  "Parent": "",
-  "Size": 0,
-  "Spending": 0,
-  "Color ": 0,
-  "Department": 0,
-  "RoundSize": 0,
-  "RoundSpend": 0
+    "Parent": "",
+    "Size": 0,
+    "Spending": 0,
+    "Color ": 0,
+    "Site": "",
+    "Department": 0,
+    "RoundSize": 0,
+    "RoundSpend": 0,
+    "Description": "",
+    "Elig": {
+    }
   },
   "UI": {
-  "Parent": "Services",
-  "Size": 120000,
-  "Spending": 1500000000,
-  "Color ": 10,
-  "Department": "DUA",
-  "RoundSize": "120K",
-  "RoundSpend": "1.5B"
+    "Parent": "Services",
+    "Size": 120000,
+    "Spending": 1500000000,
+    "Color ": 10,
+    "Site": "https://www.mass.gov/orgs/department-of-unemployment-assistance",
+    "Department": "DUA",
+    "RoundSize": "120K",
+    "RoundSpend": "1.5B",
+    "Description": "Unemployment Insurance",
+    "Elig": {
+      "Income": "$0 currently, at least $6,300 during last 4 completed quarters",
+      "Age": "Ages 18 and older",
+      "Resident": "U.S. Citizen",
+      "Other":"Legally authorized to work in the U.S., working significantly reduced hours or unemployed through no fault of your own, able to begin work without delay when offered"
+      }
   },
   "EAEDC": {
-  "Parent": "Services",
-  "Size": 28070,
-  "Spending": 194200000,
-  "Color ": 3,
-  "Department": "DTA",
-  "RoundSize": "28K",
-  "RoundSpend": "194M"
+    "Parent": "Services",
+    "Size": 28070,
+    "Spending": 194200000,
+    "Color ": 3,
+    "Site": "https://www.mass.gov/info-details/check-eaedc-eligibility-and-how-to-apply",
+    "Department": "DTA",
+    "RoundSize": "28K",
+    "RoundSpend": "194M",
+    "Description": "Emergency Aid to the Elderly, Disabled and Children",
+    "Elig": {
+      "Income": "$4,812",
+      "Resident": "U.S. citizen or legal noncitizen, and Massachusets Resident"
+    }
   },
   "MASSVETS": {
-  "Parent": "Services",
-  "Size": 69565,
-  "Spending": 108868801,
-  "Color ": 2,
-  "Department": "EOVS",
-  "RoundSize": "69K",
-  "RoundSpend": "109M"
+    "Parent": "Services",
+    "Size": 69565,
+    "Spending": 108868801,
+    "Color ": 2,
+    "Site": "https://www.mass.gov/info-details/massvets-veteran-financial-benefits",
+    "Department": "EOVS",
+    "RoundSize": "69K",
+    "RoundSpend": "109M",
+    "Description": "Veterans Benefits",
+    "Elig": {
+      "Income": "$24,972",
+      "Resident": "Massachusets Resident",
+      "Other": "Must be a veteran, or a dependent of a veteran"
+    }
   },
   "TAFDC": {
-  "Parent": "Services",
-  "Size": 92659,
-  "Spending": 424300000,
-  "Color ": 5,
-  "Department": "DTA",
-  "RoundSize": "92K",
-  "RoundSpend": "424M"
-  }
+    "Parent": "Services",
+    "Size": 92659,
+    "Spending": 424300000,
+    "Color ": 5,
+    "Site": "https://www.mass.gov/how-to/apply-for-tafdc#:~",
+    "Department": "DTA",
+    "RoundSize": "92K",
+    "RoundSpend": "424M",
+    "Description": "Transitional Aid to Families with Dependent Children",
+    "Elig": {
+      "Income": "$6,636",
+      "Age": "Have childen ages 18 or younger",
+      "Resident": "Massachusets Resident",
+      "Other": "You may also be eligible if you are pregnant and due in less than 4 months, or are a caregiver for a child related to you"
+    }
+  } 
 }

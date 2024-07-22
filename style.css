@@ -25,7 +25,7 @@
 }
 
 
-/* Add this to your existing CSS for sidebar */
+/* Sidebar does not show on mobile */
 .sidebar {
     display: none !important; /* Hide sidebar on mobile */
 }
@@ -168,11 +168,11 @@ h2 {
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: left;
 }
 
 .sidebar h2 {
-    text-align: center; /* Center the name at the top */
+    text-align: left; 
     font-size: 24px;
     margin-bottom: 20px;
 }
@@ -187,7 +187,7 @@ h2 {
 
 /* Table styling */
 .data-table {
-    width: 100%;
+    width: 80%;
     border-collapse: collapse;
     overflow-x: auto; /* Ensure table fits within mobile screens */
     display: block;

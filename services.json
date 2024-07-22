@@ -25,7 +25,7 @@
     "Elig": {
       "Income": "Unclear!",
       "Age": "Ages 21-64",
-      "Resident": "Massachusets Residency Required"
+      "Resident": "Massachusets Resident"
     }
   },
   "SNAP": {
@@ -41,7 +41,7 @@
     "Elig": {
       "Income": "$2,510",
       "Benefit": "$3,492",
-      "Resident": "Massachusets Residency Required"
+      "Resident": "Massachusets Resident"
     }
   },
   "LIHEAP": {
@@ -56,7 +56,7 @@
     "Description": "The Massachusetts Low Income Home Energy Assistance Program",
     "Elig": {
       "Income": "$49,196",
-      "Resident": "Massachusets Residency Required"
+      "Resident": "Massachusets Resident"
     }
   },
   "SSI": {
@@ -72,7 +72,7 @@
     "Elig": {
       "Income": "$1,433",
       "Age": "Ages 65 and older, or disabled at any age",
-      "Resident": "Massachusets Residency Required"
+      "Resident": "Massachusets Resident"
     }
   },
   "Education": {
@@ -86,7 +86,7 @@
     "RoundSpend": "524M",
     "Description": "Massachusetts Elementary and Secondary Education",
     "Elig": {
-      "Resident":"Massachusets Residency Required"
+      "Resident":"Massachusets Resident"
     }
   },
   "Other": {

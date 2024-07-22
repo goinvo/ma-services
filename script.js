@@ -212,16 +212,19 @@ function displayNodeInfo(data) {
     let eligibilityHtml = '';
     if (eligibility) {
         if (data.eligibility.Income) {
-            eligibilityHtml += `<p>Max Income: ${data.eligibility.Income}</p>`;
+            eligibilityHtml += `<p>Max Income per Year: ${data.eligibility.Income}</p>`;
         }
         if (data.eligibility.Benefit) {
-            eligibilityHtml += `<p>Correlated Benefit: ${data.eligibility.Benefit}</p>`;
+            eligibilityHtml += `<p>Correlated Benefit per Year: ${data.eligibility.Benefit}</p>`;
         }
         if (data.eligibility.Age) {
             eligibilityHtml += `<p>Age: ${data.eligibility.Age}</p>`;
         }
         if (data.eligibility.Resident) {
             eligibilityHtml += `<p>Residency: ${data.eligibility.Resident}</p>`;
+        }
+        if (data.eligibility.Other) {
+            eligibilityHtml += `<p>Other: ${data.eligibility.Other}</p>`;
         }
     }
 
@@ -236,7 +239,8 @@ function displayNodeInfo(data) {
         ${data.roundSpend ? `<p>Spend: $${formattedSpending}</p>` : ''}
         ${data.department ? `<p>Department: ${data.department}</p>` : ''}
         
-        ${eligibilityHtml ? `<h3>Eligibility Criteria</h3>${eligibilityHtml}` : ''}
+        ${eligibilityHtml ? `<h3>Eligibility Criteria for an Individual</h3>${eligibilityHtml}` : ''}
+        
     `;
     statisticsDiv.classList.add('visible'); // for mobile
 }
@@ -261,6 +265,7 @@ function drawTable(data) {
     document.getElementById('d3_chart_div').style.display = 'none'; // Hide the chart div
     document.getElementById('table_div').style.display = 'block'; // Display the table div
     document.getElementById('statistics').style.display = 'none'; // Hide the statistics sidebar
+    clearSidebar(); // Clear the sidebar content
     highlightSelectedViewButton('table'); // Highlight the table view button
 
     const flatData = data.children.map(d => ({
@@ -290,11 +295,18 @@ function drawTable(data) {
     const rows = tbody.selectAll("tr") // Select all rows
         .data(flatData) // Bind data
         .enter() // Enter selection
-        .append("tr"); // Append rows
+        .append("tr") // Append rows
+        .on("click", function(event, d) { // Add click event listener
+            if (d.name === "Other") {
+                loadData('other.json'); // Load other data file
+                currentFile = 'other.json'; // Set current file to other data file
+                updateHeader("Other Services"); // Update header text
+            }
+        });
 
     rows.selectAll("td") // Select all cells
         .data(d => [
-            d.name === 'Other' ? d.name : `<a href="${d.site}" >${d.name}</a>`, // Links to mass gov page, no link for other
+            d.name === 'Other' ? d.name : `<a href="${d.site}" target="_blank">${d.name}</a>`, // Links to mass gov page, no link for other
             format(d.size),
             `$${format(d.spending)}`, // Add $ in front of spending
             d.department
@@ -307,6 +319,7 @@ function drawTable(data) {
         .duration(750) // Set duration
         .style("opacity", 1); // Set opacity
 }
+
 
 /**
  * wrapText(text, width)

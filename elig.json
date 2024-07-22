@@ -4,18 +4,29 @@
     "Size": 0,
     "Spending": 0,
     "Color ": 0,
-    "Department": 0,
-    "RoundSize": 0,
-    "RoundSpend": 0
+    "Department": "",
+    "Site": "",
+    "RoundSize": "",
+    "RoundSpend": "",
+    "Description": " ",
+    "Elig": {
+    }
   },
   "MassHealth": {
     "Parent": "Services",
     "Size": 2127026,
     "Spending": 19170000000,
-    "Color ": 10,
+    "Color": 10,
     "Department": "EOHHS",
+    "Site": "https://www.mass.gov/topics/masshealth",
     "RoundSize": "2.13M",
-    "RoundSpend": "19.2B"
+    "RoundSpend": "19.2B",
+    "Description": "Massachusets Medicaid",
+    "Elig": {
+      "Income": "Unclear!",
+      "Age": "Ages 21-64",
+      "Resident": "Massachusets Resident"
+    }
   },
   "SNAP": {
     "Parent": "Services",
@@ -23,8 +34,15 @@
     "Spending": 60000000,
     "Color ": 1,
     "Department": "DTA",
+    "Site": "https://www.mass.gov/snap-benefits-formerly-food-stamps",
     "RoundSize": "1.08M",
-    "RoundSpend": "60M"
+    "RoundSpend": "60M",
+    "Description": "Supplemental Nutrition Program",
+    "Elig": {
+      "Income": "$2,510",
+      "Benefit": "$3,492",
+      "Resident": "Massachusets Resident"
+    }
   },
   "LIHEAP": {
     "Parent": "Services",
@@ -32,8 +50,14 @@
     "Spending": 150000000,
     "Color ": 2,
     "Department": "EOHLC",
+    "Site": "https://www.mass.gov/info-details/learn-about-home-energy-assistance-heap",
     "RoundSize": "320K",
-    "RoundSpend": "150M"
+    "RoundSpend": "150M",
+    "Description": "The Massachusetts Low Income Home Energy Assistance Program",
+    "Elig": {
+      "Income": "$49,196",
+      "Resident": "Massachusets Resident"
+    }
   },
   "SSI": {
     "Parent": "Services",
@@ -41,8 +65,15 @@
     "Spending": 200000000,
     "Color ": 3,
     "Department": "MRC",
+    "Site": "https://www.mass.gov/info-details/eligibility-for-ssi-and-ssdi",
     "RoundSize": "213K",
-    "RoundSpend": "200M"
+    "RoundSpend": "200M",
+    "Description": "Supplemental Security Income",
+    "Elig": {
+      "Income": "$1,433",
+      "Age": "Ages 65 and older, or disabled at any age",
+      "Resident": "Massachusets Resident"
+    }
   },
   "Other": {
     "Parent": "Services",
@@ -50,6 +81,7 @@
     "Spending": 463000000,
     "Color ": 5,
     "Department": "N/A",
+    "Site": "",
     "RoundSize": "189K",
     "RoundSpend": "463M"
   }
