@@ -207,7 +207,7 @@ function displayNodeInfo(data) {
             eligibilityHtml += `<p>Max Income per Year: ${data.eligibility.Income}</p>`;
         }
         if (data.eligibility.Benefit) {
-            eligibilityHtml += `<p>Correlated Benefit per Year: ${data.eligibility.Benefit}</p>`;
+            eligibilityHtml += `<p>Benefits per Year: ${data.eligibility.Benefit}</p>`;
         }
         if (data.eligibility.Age) {
             eligibilityHtml += `<p>Age: ${data.eligibility.Age}</p>`;
@@ -239,6 +239,7 @@ function displayNodeInfo(data) {
     `;
     statisticsDiv.classList.add('visible'); // for mobile
 }
+
 
 
 /**

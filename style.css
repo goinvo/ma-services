@@ -109,6 +109,7 @@ h2 {
     background: none;
     text-align: center;
     color: var(--nav-color);
+    transition: background-color 0.3s ease; 
 }
 
 .nav button:hover {
@@ -364,7 +365,8 @@ h2 {
     .sidebar {
         display: flex !important; /* Show sidebar on tablet and desktop */
         width: 25%; /* 1 out of 4 columns */
-        padding: 10px;
+        padding: 20px;
+        margin-left:10px !important;
         background: white; 
         border-left: var(--header-border);
         overflow-y: auto;
@@ -405,21 +407,28 @@ h2 {
     }
 
     .sidebar a:hover {
-        color: var(--link-color) !important;
+        color: var(--link-color) ;
         text-decoration: underline !important;
     }
     
+    /* Apply Now link styling */
     .apply-now-link {
-        line-height: 2 !important;
-        color: var(--link-color) !important;
-        font-weight: bold; 
-        text-decoration: none; 
+        display: inline-block;
+        padding: 10px 10px;
+        background-color: var(--header-bg);
+        color: black; 
+        text-align: center;
+        text-decoration: none;
+        border-radius: 8px; /* rounded corners */
+        font-weight: bold;
+        transition: background-color 0.3s ease; 
     }
-    
+
     .apply-now-link:hover {
-        color: var(--link-color) !important;
-        text-decoration: underline; 
+        background-color: var(--link-color);
+        color: white !important;
     }
+
 
 }
 
