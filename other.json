@@ -42,7 +42,7 @@
     "Description": "Emergency Aid to the Elderly, Disabled and Children",
     "Elig": {
       "Income": "$4,812",
-      "Resident": "U.S. citizen or legal noncitizen, and Massachusets Resident",
+      "Resident": "U.S. citizen or legal noncitizen, and Massachusetts Resident",
       "URL":"https://www.mass.gov/info-details/check-eaedc-eligibility-and-how-to-apply"
     }
   },
@@ -58,7 +58,7 @@
     "Description": "Veterans Benefits",
     "Elig": {
       "Income": "$24,972",
-      "Resident": "Massachusets Resident",
+      "Resident": "Massachusetts Resident",
       "Other": "Must be a veteran, or a dependent of a veteran",
       "URL":"https://www.mass.gov/how-to/apply-for-financial-help-for-veterans"
     }
@@ -76,7 +76,7 @@
     "Elig": {
       "Income": "$6,636",
       "Age": "Have childen ages 18 or younger",
-      "Resident": "Massachusets Resident",
+      "Resident": "Massachusetts Resident",
       "Other": "You may also be eligible if you are pregnant and due in less than 4 months, or are a caregiver for a child related to you",
       "URL":"https://www.mass.gov/how-to/apply-for-tafdc"
     }
@@ -93,7 +93,7 @@
     "Description": "Emergency Assistance Family Shelter",
     "Elig": {
       "Income": "$6,636",
-      "Resident": "Massachusets Resident",
+      "Resident": "Massachusetts Resident",
       "Other": "You are pregnant or have children under 21",
       "URL":"https://www.mass.gov/how-to/apply-for-emergency-assistance-ea-family-shelter"
     }

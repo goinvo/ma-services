@@ -348,8 +348,8 @@ h2 {
 
     /* Larger table on desktop */
     #table_div .data-table {
-        width: 100%;
-        font-size: 16px; /* Larger font size for desktop */
+        width: 80%;
+        font-size: 14px; /* Larger font size for desktop */
     }
 
     #table_div .data-table th, #table_div .data-table td {

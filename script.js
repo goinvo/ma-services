@@ -161,7 +161,7 @@ function drawTreeMap(data, transition = false) {
             .attr("class", "node-text-enrolled")
             .style("text-anchor", "middle")
             .style("font-size", smallFontSize + 'px')
-            .text(`${d.data.roundSize} enrolled`)
+            .text(`${d.data.roundSize} people`)
             .call(wrapText, d.x1 - d.x0 - padding * 2);
 
         group.append("text")
@@ -268,7 +268,8 @@ function drawTable(data) {
         size: d.value,
         spending: d.spending,
         department: d.department,
-        site: d.site // Assuming the JSON includes a 'site' key
+        site: d.site,
+        description: d.description // Add description from JSON
     })); // Flatten the hierarchical data
 
     const format = d3.format(","); // Create number formatter for commas
@@ -282,7 +283,7 @@ function drawTable(data) {
 
     thead.append("tr") // Append row to thead
         .selectAll("th") // Select all th elements
-        .data(["Service", "Enrolled", "Spend", "Department"]) // Bind data
+        .data(["Service", "People", "Spend", "Department", "Description"]) // Bind data including Description
         .enter() // Enter selection
         .append("th") // Append th elements
         .text(d => d); // Set text
@@ -304,7 +305,8 @@ function drawTable(data) {
             d.name === 'Other' ? d.name : `<a href="${d.site}" target="_blank">${d.name}</a>`, // Links to mass gov page, no link for other
             format(d.size),
             `$${format(d.spending)}`, // Add $ in front of spending
-            d.department
+            d.department,
+            d.description // Include description
         ]) // Bind data and format size and spending
         .enter() // Enter selection
         .append("td") // Append cells
@@ -313,7 +315,6 @@ function drawTable(data) {
     tableDiv.transition() // Add transition effect
         .duration(750) // Set duration
         .style("opacity", 1); // Set opacity
-        
 }
 
 
