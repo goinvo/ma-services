@@ -122,7 +122,7 @@ function drawTreeMap(data, transition = false) {
         .attr("viewBox", `0 0 ${width} ${height}`)                      // Set viewBox attribute
         .attr("width", "100%")                                          // Set width
         .attr("height", "100%")                                         // Set height
-        .attr("style", "font: 10px sans-serif;");                       // Set font style
+        .attr("style", "font: 10px sans-serif;") ;                      // Set font style
 
     const node = svg.selectAll("g")                                     // Select all groups
         .data(root.leaves())                                            // Bind data
@@ -214,27 +214,32 @@ function displayNodeInfo(data) {
         if (data.eligibility.Income) {
             eligibilityHtml += `<p>Max Income: ${data.eligibility.Income}</p>`;
         }
+        if (data.eligibility.Benefit) {
+            eligibilityHtml += `<p>Correlated Benefit: ${data.eligibility.Benefit}</p>`;
+        }
         if (data.eligibility.Age) {
             eligibilityHtml += `<p>Age: ${data.eligibility.Age}</p>`;
         }
-        if (data.eligibility.Other) {
-            eligibilityHtml += `<p>Other: ${data.eligibility.Other}</p>`;
+        if (data.eligibility.Resident) {
+            eligibilityHtml += `<p>Residency: ${data.eligibility.Resident}</p>`;
         }
     }
+
+    const formattedValue = data.value.toLocaleString();
+    const formattedSpending = data.spending.toLocaleString();
 
     statisticsDiv.innerHTML = `
         <h2>${data.name}</h2>
         <h3><a href="${data.site}" target="_blank">${data.description}</a></h3>
         
-        ${data.roundSize ? `<p>People: ${data.roundSize}</p>` : ''}
-        ${data.roundSpend ? `<p>Spend: $${data.roundSpend}</p>` : ''}
+        ${data.roundSize ? `<p>People: ${formattedValue}</p>` : ''}
+        ${data.roundSpend ? `<p>Spend: $${formattedSpending}</p>` : ''}
         ${data.department ? `<p>Department: ${data.department}</p>` : ''}
         
         ${eligibilityHtml ? `<h3>Eligibility Criteria</h3>${eligibilityHtml}` : ''}
     `;
     statisticsDiv.classList.add('visible'); // for mobile
 }
-
 
 
 /**

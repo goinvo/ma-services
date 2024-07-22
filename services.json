@@ -4,15 +4,12 @@
     "Size": 0,
     "Spending": 0,
     "Color ": 0,
-    "Department": 0,
+    "Department": "",
     "Site": "",
-    "RoundSize": "0",
-    "RoundSpend": "0",
+    "RoundSize": "",
+    "RoundSpend": "",
     "Description": " ",
     "Elig": {
-      "Income": "20K",
-      "Age": "21 - 64",
-      "Other": "N/A"
     }
   },
   "MassHealth": {
@@ -26,9 +23,9 @@
     "RoundSpend": "19.2B",
     "Description": "Massachusets Medicaid",
     "Elig": {
-      "Income": "$20K",
-      "Age": "21 - 64 years",
-      "Other": "N/A"
+      "Income": "Unclear!",
+      "Age": "Ages 21-64",
+      "Resident": "Massachusets Residency Required"
     }
   },
   "SNAP": {
@@ -42,9 +39,9 @@
     "RoundSpend": "60M",
     "Description": "Supplemental Nutrition Program",
     "Elig": {
-      "Income": "x",
-      "Age": "x",
-      "Other": "N/A"
+      "Income": "$2,510",
+      "Benefit": "$3,492",
+      "Resident": "Massachusets Residency Required"
     }
   },
   "LIHEAP": {
@@ -58,8 +55,8 @@
     "RoundSpend": "150M",
     "Description": "The Massachusetts Low Income Home Energy Assistance Program",
     "Elig": {
-      "Income": "x",
-      "Age": "x"
+      "Income": "$49,196",
+      "Resident": "Massachusets Residency Required"
     }
   },
   "SSI": {
@@ -73,6 +70,9 @@
     "RoundSpend": "200M",
     "Description": "Supplemental Security Income",
     "Elig": {
+      "Income": "$1,433",
+      "Age": "Ages 65 and older, or disabled at any age",
+      "Resident": "Massachusets Residency Required"
     }
   },
   "Education": {
@@ -85,7 +85,9 @@
     "RoundSize": "896K",
     "RoundSpend": "524M",
     "Description": "Massachusetts Elementary and Secondary Education",
-    "Elig": "All Residents"
+    "Elig": {
+      "Resident":"Massachusets Residency Required"
+    }
   },
   "Other": {
     "Parent": "Services",
