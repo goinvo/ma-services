@@ -187,7 +187,7 @@ h2 {
 
 /* Table styling */
 .data-table {
-    width: 80%;
+    width: 100%;
     border-collapse: collapse;
     overflow-x: auto; /* Ensure table fits within mobile screens */
     display: block;
@@ -348,7 +348,7 @@ h2 {
 
     /* Larger table on desktop */
     #table_div .data-table {
-        width: 80%;
+        width: 100%;
         font-size: 14px; /* Larger font size for desktop */
     }
 
