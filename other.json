@@ -74,7 +74,7 @@
     "RoundSpend": "424M",
     "Description": "Transitional Aid to Families with Dependent Children",
     "Elig": {
-      "Income": "$6,636",
+      "Income": "$24,972",
       "Age": "Have childen ages 18 or younger",
       "Resident": "Massachusetts Resident",
       "Other": "You may also be eligible if you are pregnant and due in less than 4 months, or are a caregiver for a child related to you",
@@ -92,7 +92,7 @@
     "RoundSpend": "324M",
     "Description": "Emergency Assistance Family Shelter",
     "Elig": {
-      "Income": "$6,636",
+      "Income": "$17,316",
       "Resident": "Massachusetts Resident",
       "Other": "You are pregnant or have children under 21",
       "URL":"https://www.mass.gov/how-to/apply-for-emergency-assistance-ea-family-shelter"

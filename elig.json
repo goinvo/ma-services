@@ -23,7 +23,7 @@
     "RoundSpend": "19.2B",
     "Description": "Massachusetts Medicaid",
     "Elig": {
-      "Income": "Unclear!",
+      "Income": "$20,040",
       "Age": "Ages 21-64",
       "Resident": "Massachusetts Resident",
       "URL":"https://www.mass.gov/how-to/apply-for-masshealth-the-health-safety-net-or-the-childrens-medical-security-plan"
@@ -41,7 +41,7 @@
     "Description": "Supplemental Nutrition Program",
     "Elig": {
       "Income": "$2,510",
-      "Benefit": "$3,492",
+      "Benefit": "$30,120",
       "Resident": "Massachusetts Resident",
       "URL":"https://www.mass.gov/how-to/apply-for-snap-benefits-food-stamps"
     }
@@ -73,7 +73,7 @@
     "RoundSpend": "200M",
     "Description": "Supplemental Security Income",
     "Elig": {
-      "Income": "$1,433",
+      "Income": "$17,196",
       "Age": "Ages 65 and older, or disabled at any age",
       "Resident": "Massachusetts Resident",
       "URL":"https://www.mass.gov/how-to/apply-for-ssdi-or-ssi-benefits"
