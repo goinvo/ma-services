@@ -24,7 +24,7 @@
     "Description": "Massachusets Medicaid",
     "Elig": {
       "Income": "Unclear!",
-      "Age": "Ages 21-64",
+      "Age": "Ages 19-64",
       "Resident": "Massachusets Resident",
       "URL":"https://www.mass.gov/how-to/apply-for-masshealth-the-health-safety-net-or-the-childrens-medical-security-plan"
     }
