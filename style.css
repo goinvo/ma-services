@@ -155,6 +155,13 @@ h2 {
     height: 450px;
     padding: 10px;
 }
+.node-text {
+    font-family: var(--font-tree);
+}
+
+.node-text-enrolled {
+    font-family: var(--font-tree);
+}
 
 
 /* Table styling */
@@ -286,6 +293,14 @@ h2 {
 
     .mobile-nav {
         display: none;
+    }
+
+    .node-text {
+        font-family: var(--font-tree);
+    }
+    
+    .node-text-enrolled {
+        font-family: var(--font-tree);
     }
 }
 
