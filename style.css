@@ -25,12 +25,6 @@
     --sidebar-height-mobile: 40%; /* New variable for sidebar height on mobile */
 }
 
-
-/* Sidebar does not show on mobile */
-.sidebar {
-    display: none !important; /* Hide sidebar on mobile */
-}
-
 /* Body styling */
 body {
     font-family: var(--font-family);
@@ -162,30 +156,6 @@ h2 {
     padding: 10px;
 }
 
-.sidebar {
-    width: 25%; /* 1 out of 4 columns */
-    padding: 10px;
-    background: white; /* Set background to white */
-    border-left: var(--header-border);
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: left;
-}
-
-.sidebar h2 {
-    text-align: left; 
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-.sidebar p {
-    text-align: left;
-    padding: 10px;
-    font-size: 16px;
-    line-height: 1.5;
-}
-
 
 /* Table styling */
 .data-table {
@@ -272,10 +242,11 @@ h2 {
     font-weight: bold;
 }
 
-/* Sidebar styling for mobile */ 
+/* Sidebar does not show on mobile */
 .sidebar {
-    display: none; /* Hide sidebar on mobile */
+    display: none !important; /* Hide sidebar on mobile */
 }
+
 
 /* Responsive design for tablets */
 @media (min-width: 601px) {
