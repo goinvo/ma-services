@@ -11,6 +11,7 @@ It's easy to filter by type of service, and see different views. <br />
 | Views | Filters | 
 | --------- | ---- |
 | Tree Map | All Services | 
+| --------- | ---- |
 | Table | Benefits Only | 
 
 Within All and Benefits, the Other section expands to show small enrollment sized services       
@@ -30,10 +31,8 @@ Within All and Benefits, the Other section expands to show small enrollment size
 Founders/Designers: [GoInvo](http://www.goinvo.com) is a digital design studio in Boston, crafting the future of healthcare through strategy, creativity, and vision.
 
 ### Contact Us
-[hgraph@goinvo.com](mailto:hgraph@goinvo.com)  
-[Open Office Hours](https://calendly.com/goinvo/hgraph-open-office-hours)
+[hello@goinvo.com](mailto:hello@goinvo.com)  
 
 ### License
 hGraph is [Apache 2.0](https://github.com/goinvo/hGraph/blob/master/LICENSE) licensed.
 
-### For guidance integrating hGraph into your product or service, contact us at [hgraph@goinvo.com](mailto:hgraph@goinvo.com).
