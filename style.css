@@ -364,7 +364,7 @@ h2 {
         text-align: left ; 
         width: 100% ;
         font-size: 24px ;
-        margin-bottom: 5px ;        /* space between title and description */
+        margin-bottom: 0px ;        /* space between title and description */
         padding-left: 10px ;
         line-height: 1.2 ; 
     }
@@ -373,7 +373,7 @@ h2 {
         text-align: left; 
         width: 100%; 
         font-size: 16px;   
-        margin-bottom: 30px ;       /* space between description and p (people, spend, dep)*/
+        margin-bottom: 15px ;       /* space between description and p (people, spend, dep)*/
         padding-left: 10px ;
         font-weight: bold ;
         line-height: 1.2 ; 
@@ -383,8 +383,8 @@ h2 {
         text-align: left; 
         width: 100%; 
         font-size: 16px;
-        margin-top: 45px;           /* space between p (people spend) and Elig Criteria */
-        margin-bottom: 25px;        /* space between Elig Criteria for Individual and p (max income, age, etc.) */
+        margin-top: 30px;           /* space between p (people spend) and Elig Criteria */
+        margin-bottom: 15px;        /* space between Elig Criteria for Individual and p (max income, age, etc.) */
         padding-left: 10px ;
         font-weight: bold ;
         line-height: 1.2 ; 
