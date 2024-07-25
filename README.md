@@ -18,25 +18,21 @@ Within All and Benefits, the Other section expands to show small enrollment size
 
 
 ## Installation
-To edit the ma-services repo locally, you need to install node.js:
-```bash
-$ npm install -g npm
-```
-
-To view changes as you work, install http-server using Homebrew:
-```bash
-$ brew install http-server
-$ npm install http-server
-```
-
 Clone the repo to your local machine:
 ```bash
 $ git clone https://github.com/goinvo/ma-services.git
 ```
-
-To run the server:
+To run ma-service locally, you need to install: <br/>
+- Node.js:
 ```bash
-$ cd ma-services
+$ npm install -g npm
+```
+- Local server:
+```bash
+$ npm install http-server
+```
+To run the local server:
+```bash
 $ http-server
 ```
 
