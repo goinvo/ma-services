@@ -22,6 +22,10 @@ To edit the ma-services repo locally, you need to install node.js
 ```bash
 $ npm install -g npm
 ```
+Clone the repo to your local machine
+```bash
+$ git clone https://github.com/goinvo/ma-services.git/
+```
 
 ## Research
 To view our research, see the master [google sheets](https://docs.google.com/spreadsheets/d/16CN-S0y3l6Tk8TizFWQkr3FHQ8-0W07K2vIyocaVyzY/edit?usp=sharing) document.
