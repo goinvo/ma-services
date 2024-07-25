@@ -30,7 +30,6 @@ $ npm install http-server
 ```
 
 Clone the repo to your local machine:
-To view changes as you work install http-server using Homebrew:
 ```bash
 $ git clone https://github.com/goinvo/ma-services.git
 ```
