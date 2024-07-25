@@ -23,7 +23,7 @@
     "RoundSpend": "1.5B",
     "Description": "Unemployment Insurance",
     "Elig": {
-      "Income": "$0 currently, at least $6,300 during last 4 completed quarters",
+      "Income": "Currently $0, but have earned at least $6,300 during the last 4 completed quarters",
       "Age": "Ages 18 and older",
       "Resident": "U.S. Citizen",
       "Other":"Legally authorized to work in the U.S., working significantly reduced hours or unemployed through no fault of your own, able to begin work without delay when offered",
