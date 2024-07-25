@@ -24,13 +24,12 @@ $ npm install -g npm
 ```
 
 ## Research
-To view our research, see the master google sheets document. 
-[Research](https://docs.google.com/spreadsheets/d/16CN-S0y3l6Tk8TizFWQkr3FHQ8-0W07K2vIyocaVyzY/edit?usp=sharing)
+To view our research, see the master [google sheets](https://docs.google.com/spreadsheets/d/16CN-S0y3l6Tk8TizFWQkr3FHQ8-0W07K2vIyocaVyzY/edit?usp=sharing)document.
 
 ## Next Steps
 Currently, ma-services is only showcasing a few of the most commmonly used Massachusets services. The next step is to add more services to the visualization.
-< br />
-To update the dataset, update the JSON files in this repo. 
+<br /><br />
+To update the dataset, update the JSON files in this repo. <br />
 Additionally, the data for each JSON file is a google sheet in the MAServices --> Sheets to JSON Google Drive folder
 
 ### Core Contributors
@@ -40,5 +39,5 @@ Founders/Designers: [GoInvo](http://www.goinvo.com) is a digital design studio i
 [hello@goinvo.com](mailto:hello@goinvo.com)  
 
 ### License
-ma-services is [CC)-1.0](https://github.com/goinvo/ma-services?tab=CC0-1.0-1-ov-file) licensed.
+ma-services is [CC0-1.0](https://github.com/goinvo/ma-services?tab=CC0-1.0-1-ov-file) licensed.
 
