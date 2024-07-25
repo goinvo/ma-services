@@ -23,7 +23,7 @@ To edit the ma-services repo locally, you need to install node.js:
 $ npm install -g npm
 ```
 
-To view changes as you work install http-server using Homebrew:
+To view changes as you work, install http-server using Homebrew:
 ```bash
 $ brew install http-server
 $ npm install http-server
@@ -34,7 +34,7 @@ Clone the repo to your local machine:
 $ git clone https://github.com/goinvo/ma-services.git
 ```
 
-To run the server, navigate to your project directory, then:
+To run the server:
 ```bash
 $ cd ma-services
 $ http-server
