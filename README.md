@@ -7,23 +7,18 @@ ma-services is built using HTML, CSS, JS and [D3](https://d3js.org/).
 
 ## Usage
 It's easy to filter by type of service, and see different views. <br />
-Two views: <br />
-    Chart - tree map view <br />
-    Table - table view <br />
-Two Filters: <br />
-    All - all services <br />
-    Benefits - eligibility servicess <br />
-    Other - small enrollment sized services within All and Benefits       
+
+| Views | Filters | 
+| --------- | ---- |
+| Tree Map | All Services | 
+| Table | Benefits Only | 
+
+Within All and Benefits, the Other section expands to show small enrollment sized services       
+
 
 
 ## Installation
-This package can be [found on npm](https://www.npmjs.com/package/hgraph-react) and installed like so:
-```bash
-$ yarn add hgraph-react
-# or
-$ npm install hgraph-react
-```
-The hGraph component is packaged using [webpack](https://webpack.js.org/). 
+
 
 
 
