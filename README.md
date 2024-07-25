@@ -38,8 +38,6 @@ To run the server:
 ```bash
 $ cd ma-services
 $ http-server
-$ cd ma-services
-$ http-server
 ```
 
 ## Research
