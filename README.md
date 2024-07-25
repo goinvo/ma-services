@@ -1,10 +1,10 @@
 
-# [ma-services](https://goinvo.github.io/ma-services/): Data visualization for Massachusetts Services.
+# [ma-services](https://goinvo.github.io/ma-services/): Data visualization for MA Services.
 ma-services is a data visualization to show all Massachusetts services with their sizes, government spending, and eligibility criteria. 
 ma-services is built using HTML, CSS, JS and [D3](https://d3js.org/).
 
+![ma-services](ma-services.png)
 ![ma-services](https://github.com/ma-services/ma-services.png)
-
 
 
 Two views: Tree map and table
