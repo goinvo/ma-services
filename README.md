@@ -24,7 +24,7 @@ $ npm install -g npm
 ```
 
 ## Research
-To view our research, see the master [google sheets](https://docs.google.com/spreadsheets/d/16CN-S0y3l6Tk8TizFWQkr3FHQ8-0W07K2vIyocaVyzY/edit?usp=sharing)document.
+To view our research, see the master [google sheets](https://docs.google.com/spreadsheets/d/16CN-S0y3l6Tk8TizFWQkr3FHQ8-0W07K2vIyocaVyzY/edit?usp=sharing) document.
 
 ## Next Steps
 Currently, ma-services is only showcasing a few of the most commmonly used Massachusets services. The next step is to add more services to the visualization.
