@@ -24,7 +24,7 @@ $ npm install -g npm
 ```
 Clone the repo to your local machine
 ```bash
-$ git clone https://github.com/goinvo/ma-services.git/
+$ git clone getLinkFromAbove
 ```
 
 ## Research
