@@ -11,21 +11,27 @@ It's easy to filter by type of service, and see different views. <br />
 | Views | Filters | 
 | --------- | ---- |
 | Tree Map | All Services | 
-| --------- | ---- |
 | Table | Benefits Only | 
+|  | Other | 
 
 Within All and Benefits, the Other section expands to show small enrollment sized services       
 
 
-
 ## Installation
+To edit the ma-services repo locally, you need to install node.js 
+```bash
+$ npm install -g npm
+```
 
+## Research
+To view our research, see the master google sheets document. 
+[Research](https://docs.google.com/spreadsheets/d/16CN-S0y3l6Tk8TizFWQkr3FHQ8-0W07K2vIyocaVyzY/edit?usp=sharing)
 
-
-
-
-
-
+## Next Steps
+Currently, ma-services is only showcasing a few of the most commmonly used Massachusets services. The next step is to add more services to the visualization.
+< br />
+To update the dataset, update the JSON files in this repo. 
+Additionally, the data for each JSON file is a google sheet in the MAServices --> Sheets to JSON Google Drive folder
 
 ### Core Contributors
 Founders/Designers: [GoInvo](http://www.goinvo.com) is a digital design studio in Boston, crafting the future of healthcare through strategy, creativity, and vision.
@@ -34,5 +40,5 @@ Founders/Designers: [GoInvo](http://www.goinvo.com) is a digital design studio i
 [hello@goinvo.com](mailto:hello@goinvo.com)  
 
 ### License
-hGraph is [Apache 2.0](https://github.com/goinvo/hGraph/blob/master/LICENSE) licensed.
+ma-services is [CC)-1.0](https://github.com/goinvo/ma-services?tab=CC0-1.0-1-ov-file) licensed.
 
