@@ -41,7 +41,7 @@ To view our research, see the master [google sheets](https://docs.google.com/spr
 Enrollment and spending statistics are mainly from FY2023. 
 
 ## Next Steps
-Currently, ma-services is only showcasing a few of the most commmonly used Massachusets services. The next step is to add all services to the visualization.
+Currently, ma-services is only showcasing a few of the most commmonly used MA services. The next step is to add all MA services to the visualization.
 <br /><br />
 To update the dataset, update the JSON files in this repo. <br />
 Additionally, the data for each JSON file is a google sheet in the MAServices --> Sheets to JSON Google Drive folder
