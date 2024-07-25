@@ -9,10 +9,10 @@ ma-services is built using HTML, CSS, JS and [D3](https://d3js.org/).
 It's easy to filter by type of service, and see different views. <br />
 
 | Views | Filters | 
-| --------- | ---- |
+| ----- | ---- |
 | Tree Map | All Services | 
 | Table | Benefits Only | 
-|  | Other | 
+|       | Other | 
 
 Within All and Benefits, the Other section expands to show small enrollment sized services       
 
@@ -28,7 +28,8 @@ $ git clone https://github.com/goinvo/ma-services.git/
 ```
 
 ## Research
-To view our research, see the master [google sheets](https://docs.google.com/spreadsheets/d/16CN-S0y3l6Tk8TizFWQkr3FHQ8-0W07K2vIyocaVyzY/edit?usp=sharing) document.
+To view our research, see the master [google sheets](https://docs.google.com/spreadsheets/d/16CN-S0y3l6Tk8TizFWQkr3FHQ8-0W07K2vIyocaVyzY/edit?usp=sharing) document.<br />
+Enrollment and spending statistics are mainly from FY2023. 
 
 ## Next Steps
 Currently, ma-services is only showcasing a few of the most commmonly used Massachusets services. The next step is to add more services to the visualization.
