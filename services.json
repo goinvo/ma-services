@@ -32,7 +32,7 @@
   "SNAP": {
     "Parent": "Services",
     "Size": 1083392,
-    "Spending": 60000000,
+    "Spending": 240000000,
     "Color ": 3,
     "Department": "DTA",
     "Site": "https://www.mass.gov/snap-benefits-formerly-food-stamps",
@@ -43,7 +43,7 @@
       "Income": "$30,120",
       "Benefit": "$3,492",
       "Resident": "Massachusetts Resident",
-      "URL":"https://www.mass.gov/how-to/apply-for-snap-benefits-food-stamps"
+      "URL":"https://fns-prod.azureedge.us/sites/default/files/resource-files/snap-benefits-11.pdf"
     }
   },
   "LIHEAP": {
