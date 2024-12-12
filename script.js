@@ -165,7 +165,7 @@ function drawTreeMap(data, transition = false) {
             .attr("class", "node-text-enrolled")
             .style("text-anchor", "middle")
             .style("font-size", smallFontSize + 'px')
-            .text(`$${d.data.roundSpend} spent`)
+            .text(`$${d.data.roundSpend} /y`)
             .call(wrapText, d.x1 - d.x0 - padding * 2); // Add spending text
     });
 }
